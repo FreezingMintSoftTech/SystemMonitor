@@ -1,0 +1,103 @@
+------Version 0.0.21--------
+
+- Added WirelessObtainMethod label and aplly funcionality to check is IP address obtained automatically or manually set by user
+
+------Version 0.0.20--------
+
+- Added NetworkInterface label
+- Added WirelessNetwork label,
+- Added WirelessSSID label,
+- Added WirelessIPAdress label and apply full funcionality with checking IP adress of wireless network
+
+------Version 0.0.19--------
+
+- Implemented checking if actual session last more than 1 hour and changing timeofsession display to hours and minutes
+
+------Version 0.0.18--------
+
+- Added PictureBox RAMusageGraph and implemented on_Paint event on it drawing a graph of RAM usage
+
+
+------Version 0.0.17--------
+
+- added background for RAMusageGraph,
+- added label for Total RAM in system and apply funcionality
+- added label for RAM in use and apply funcionality (for further tests)
+- added label with RAM in use in percentage and apply funcionality
+
+------Version 0.0.16--------
+
+- Added Processor Name Label and apply checking of processor name
+- Added Processor Number of Cores Label and apply checking of processor cores
+
+------Version 0.0.15--------
+
+- Added PictureBox CPUusageGraph and implemented in Paint event on it drawing a graph of CPU usage
+
+------Version 0.0.14--------
+
+- fixed form MainSCR appearance on other resolutions,
+- implemented current CPU usage show in OverallCPUusageValueLabel with ManagementObject method
+
+------Version 0.0.13--------
+
+- fixed form MainSCR appearance, better look
+- added TitleLabel on MainSCR
+- added AuthorLabel on the bottom of MainSCR
+- added OverallCPUusageLabel on MainSCR
+
+------Version 0.0.12--------
+
+- Created grid for CPU performance graph on MainSCR
+
+------Version 0.0.11--------
+
+- HistorySCR is now appearing next to MainSCR and choosing the proper side of MainSCR to appear
+
+------Version 0.0.10--------
+
+- added loading last language choosed by user at program startup
+
+------Version 0.0.09--------
+
+- added frames to MainSCR
+- added frames to HistorySCR
+- fixed form MainSCR appearance, better look
+
+------Version 0.0.08--------
+
+- added HistorySCR form to project
+- added HistoryButton on MainSCR with functionality to show HistorySCR
+- added Drag & Drop functionality for HistorySCR
+- added CloseButton on HistorySCR with funcionality
+- added starting with language choosen by user for HistorySCR & language funcionality
+- fixed form MainSCR appearance, better look
+- created SMuserDB Database with Table SessionsTable to store user sessions history
+
+------Version 0.0.07--------
+
+- added new xml file UserData/Parameters.xml for storing user parameters like location of form etc.
+- added functions to load and save to Parameters.xml file
+- added events for loading and closing MainSCR form, now app saves the current location in Parameters.xml file and after closing and starting again app appearing in the location that was left
+
+------Version 0.0.06--------
+
+- added Drag & Drop functionality for MainSCR
+
+------Version 0.0.05--------
+
+- added Hide in SystemTray funcionality
+
+------Version 0.0.03--------
+
+- fixed form MainSCR appearance, better look
+- added SettingsButton, no funcionality
+
+------Version 0.0.02--------
+
+- added language change funcionality
+
+------Version 0.0.01--------
+
+- added timer of current session
+- funcionality CloseButton

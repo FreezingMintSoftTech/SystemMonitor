@@ -1,0 +1,46 @@
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\System Monitor.exe.config
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\System Monitor.exe
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\System Monitor.pdb
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.csprojResolveAssemblyReference.cache
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Properties.Resources.resources
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.csproj.GenerateResource.Cache
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.exe
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.pdb
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Form1.resources
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\en\System Monitor.resources.dll
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\pl\System Monitor.resources.dll
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Data.lang.en.resources
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Data.lang.pl.resources
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\en\System Monitor.resources.dll
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\pl\System Monitor.resources.dll
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\GFX\Icon1.ico
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\UserData\Parameters.xml
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\Data\lang.en.resx
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\Data\lang.pl.resx
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\Data\lang.en.Designer.cs
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\Data\lang.pl.Designer.cs
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\System Monitor.exe.config
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.exe
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.pdb
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\GFX\Icon1.ico
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\UserData\Parameters.xml
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\Data\lang.en.resx
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\Data\lang.pl.resx
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\Data\lang.en.Designer.cs
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\Data\lang.pl.Designer.cs
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\System Monitor.exe
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\System Monitor.pdb
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\en\System Monitor.resources.dll
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\pl\System Monitor.resources.dll
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.csprojResolveAssemblyReference.cache
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Form1.resources
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Properties.Resources.resources
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Data.lang.en.resources
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Data.lang.pl.resources
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.csproj.GenerateResource.Cache
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\en\System Monitor.resources.dll
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\pl\System Monitor.resources.dll
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\UserData\SMuserDB.mdf
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\UserData\SMuserDB_log.ldf
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\UserData\SMuserDB.mdf
+D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\UserData\SMuserDB_log.ldf
