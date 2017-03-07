@@ -28,7 +28,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.23";   //Release number
+        public string release = " 0.0.24";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -184,6 +184,8 @@ namespace System_Monitor
             this.TimeOfSession.TabIndex = 1;
             this.TimeOfSession.Text = res_man.GetString("CurrentSessionLasts", language) + " 0 " + res_man.GetString("Minutes", language);
             this.TimeOfSession.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.TimeOfSession.MouseDown += this.MainSCR_MouseDown;
+            this.TimeOfSession.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label TitleLabel
@@ -196,6 +198,8 @@ namespace System_Monitor
             this.TitleLabel.Text = res_man.GetString("TitleLabel", language);
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.TitleLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 12);
+            this.TitleLabel.MouseDown += this.MainSCR_MouseDown;
+            this.TitleLabel.MouseMove += this.MainSCR_MouseMove;
 
 
             // 
@@ -210,6 +214,8 @@ namespace System_Monitor
             this.OverallCPUusageLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.OverallCPUusageLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 8);
             this.OverallCPUusageLabel.BackColor = System.Drawing.Color.Transparent;
+            this.OverallCPUusageLabel.MouseDown += this.MainSCR_MouseDown;
+            this.OverallCPUusageLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label OverallCPUusageValueLabel
@@ -224,6 +230,8 @@ namespace System_Monitor
             this.OverallCPUusageValueLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 10);
             this.OverallCPUusageValueLabel.Parent = OverallCPUusageLabel;
             this.OverallCPUusageValueLabel.BackColor = System.Drawing.Color.Transparent;
+            this.OverallCPUusageValueLabel.MouseDown += this.MainSCR_MouseDown;
+            this.OverallCPUusageValueLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label LanguageLabel
@@ -247,6 +255,8 @@ namespace System_Monitor
             this.VersionLabel.Text = res_man.GetString("VersionLabel", language) + release;
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.VersionLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.VersionLabel.MouseDown += this.MainSCR_MouseDown;
+            this.VersionLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label AuthorLabel
@@ -259,6 +269,8 @@ namespace System_Monitor
             this.AuthorLabel.Text = YearOfRelease + res_man.GetString("AuthorLabel", language);
             this.AuthorLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.AuthorLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.AuthorLabel.MouseDown += this.MainSCR_MouseDown;
+            this.AuthorLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label ProcessorNameLabel
@@ -271,6 +283,8 @@ namespace System_Monitor
             this.ProcessorNameLabel.Text = res_man.GetString("ProcessorNameLabel", language) + ProcessorName;
             this.ProcessorNameLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.ProcessorNameLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.ProcessorNameLabel.MouseDown += this.MainSCR_MouseDown;
+            this.ProcessorNameLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label ProcessorCoresLabel
@@ -283,6 +297,8 @@ namespace System_Monitor
             this.ProcessorCoresLabel.Text = res_man.GetString("ProcessorCoresLabel", language) + "   " + NumberOfProcessorCores.ToString();
             this.ProcessorCoresLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.ProcessorCoresLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.ProcessorCoresLabel.MouseDown += this.MainSCR_MouseDown;
+            this.ProcessorCoresLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label ProcessorTemperatureLabel
@@ -295,6 +311,8 @@ namespace System_Monitor
             this.ProcessorTemperatureLabel.Text = res_man.GetString("ProcessorTemperatureLabel", language) + "  -----";
             this.ProcessorTemperatureLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.ProcessorTemperatureLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.ProcessorTemperatureLabel.MouseDown += this.MainSCR_MouseDown;
+            this.ProcessorTemperatureLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // PictureBox CPUusageGraph
@@ -309,6 +327,8 @@ namespace System_Monitor
             this.CPUusageGraph.TabStop = false;
             this.CPUusageGraph.BackColor = System.Drawing.Color.Transparent;
             this.CPUusageGraph.Paint += new PaintEventHandler(CPUusageGraph_Paint);
+            this.CPUusageGraph.MouseDown += this.MainSCR_MouseDown;
+            this.CPUusageGraph.MouseMove += this.MainSCR_MouseMove;
             ((System.ComponentModel.ISupportInitialize)(this.CPUusageGraph)).EndInit();
 
             // 
@@ -323,6 +343,8 @@ namespace System_Monitor
             this.RAMusageGraph.TabStop = false;
             this.RAMusageGraph.BackColor = System.Drawing.Color.Transparent;
             this.RAMusageGraph.Paint += new PaintEventHandler(RAMusageGraph_Paint);
+            this.RAMusageGraph.MouseDown += this.MainSCR_MouseDown;
+            this.RAMusageGraph.MouseMove += this.MainSCR_MouseMove;
             ((System.ComponentModel.ISupportInitialize)(this.RAMusageGraph)).EndInit();
 
             // 
@@ -337,6 +359,8 @@ namespace System_Monitor
             this.OverallRAMMemoryLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.OverallRAMMemoryLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 8);
             this.OverallRAMMemoryLabel.BackColor = System.Drawing.Color.Transparent;
+            this.OverallRAMMemoryLabel.MouseDown += this.MainSCR_MouseDown;
+            this.OverallRAMMemoryLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label PercentageRAMMemoryLabel
@@ -351,6 +375,8 @@ namespace System_Monitor
             this.PercentageRAMMemoryLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 10, FontStyle.Bold);
             this.PercentageRAMMemoryLabel.ForeColor = System.Drawing.Color.Lime;
             this.PercentageRAMMemoryLabel.BackColor = System.Drawing.Color.Transparent;
+            this.PercentageRAMMemoryLabel.MouseDown += this.MainSCR_MouseDown;
+            this.PercentageRAMMemoryLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label TotalRAMMemoryLabel
@@ -363,6 +389,8 @@ namespace System_Monitor
             this.TotalRAMMemoryLabel.Text = res_man.GetString("TotalRAMMemoryLabel", language);
             this.TotalRAMMemoryLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.TotalRAMMemoryLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.TotalRAMMemoryLabel.MouseDown += this.MainSCR_MouseDown;
+            this.TotalRAMMemoryLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label TotalRAMMemoryValueLabel
@@ -375,6 +403,8 @@ namespace System_Monitor
             this.TotalRAMMemoryValueLabel.Text = "0 GB";
             this.TotalRAMMemoryValueLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.TotalRAMMemoryValueLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.TotalRAMMemoryValueLabel.MouseDown += this.MainSCR_MouseDown;
+            this.TotalRAMMemoryValueLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label TotalRAMMemoryUsageLabel
@@ -387,6 +417,8 @@ namespace System_Monitor
             this.TotalRAMMemoryUsageLabel.Text = res_man.GetString("TotalRAMMemoryUsageLabel", language);
             this.TotalRAMMemoryUsageLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.TotalRAMMemoryUsageLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.TotalRAMMemoryUsageLabel.MouseDown += this.MainSCR_MouseDown;
+            this.TotalRAMMemoryUsageLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label TotalRAMMemoryUsageValueLabel
@@ -399,6 +431,8 @@ namespace System_Monitor
             this.TotalRAMMemoryUsageValueLabel.Text = "0 GB";
             this.TotalRAMMemoryUsageValueLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.TotalRAMMemoryUsageValueLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.TotalRAMMemoryUsageValueLabel.MouseDown += this.MainSCR_MouseDown;
+            this.TotalRAMMemoryUsageValueLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label NetworkIntefacesTitle
@@ -412,6 +446,8 @@ namespace System_Monitor
             this.NetworkIntefacesTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.NetworkIntefacesTitle.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 8);
             this.NetworkIntefacesTitle.BackColor = System.Drawing.Color.Transparent;
+            this.NetworkIntefacesTitle.MouseDown += this.MainSCR_MouseDown;
+            this.NetworkIntefacesTitle.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label WirelessLabel
@@ -424,6 +460,8 @@ namespace System_Monitor
             this.WirelessLabel.Text = res_man.GetString("WirelessLabel", language); 
             this.WirelessLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WirelessLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.WirelessLabel.MouseDown += this.MainSCR_MouseDown;
+            this.WirelessLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label WirelessIPAddress
@@ -436,6 +474,8 @@ namespace System_Monitor
             this.WirelessIPAddress.Text = "IP: " + res_man.GetString("NotDetected", language);
             this.WirelessIPAddress.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WirelessIPAddress.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.WirelessIPAddress.MouseDown += this.MainSCR_MouseDown;
+            this.WirelessIPAddress.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label WirelessIPObtainMethod
@@ -448,6 +488,8 @@ namespace System_Monitor
             this.WirelessIPObtainMethod.Text = "IP: " + res_man.GetString("NotDetected", language);
             this.WirelessIPObtainMethod.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WirelessIPObtainMethod.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.WirelessIPObtainMethod.MouseDown += this.MainSCR_MouseDown;
+            this.WirelessIPObtainMethod.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label WirelessIPSSID
@@ -460,6 +502,8 @@ namespace System_Monitor
             this.WirelessIPSSID.Text = "SSID:";
             this.WirelessIPSSID.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WirelessIPSSID.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.WirelessIPSSID.MouseDown += this.MainSCR_MouseDown;
+            this.WirelessIPSSID.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label WireNetworkLabel
@@ -472,6 +516,8 @@ namespace System_Monitor
             this.WireNetworkLabel.Text = res_man.GetString("WireNetworkLabel", language);
             this.WireNetworkLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WireNetworkLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.WireNetworkLabel.MouseDown += this.MainSCR_MouseDown;
+            this.WireNetworkLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label WireNetworkIPAddressLabel
@@ -484,6 +530,8 @@ namespace System_Monitor
             this.WireNetworkIPAddressLabel.Text = "IP: " + res_man.GetString("NotDetected", language);
             this.WireNetworkIPAddressLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WireNetworkIPAddressLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.WireNetworkIPAddressLabel.MouseDown += this.MainSCR_MouseDown;
+            this.WireNetworkIPAddressLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label WireNetworkIPObtainMethodLabel
@@ -496,6 +544,8 @@ namespace System_Monitor
             this.WireNetworkIPObtainMethodLabel.Text = "IP: " + res_man.GetString("NotDetected", language);
             this.WireNetworkIPObtainMethodLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WireNetworkIPObtainMethodLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.WireNetworkIPObtainMethodLabel.MouseDown += this.MainSCR_MouseDown;
+            this.WireNetworkIPObtainMethodLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // Label WireNetworkConnectedLabel
@@ -508,6 +558,8 @@ namespace System_Monitor
             this.WireNetworkConnectedLabel.Text = res_man.GetString("Connected", language) + ": " + res_man.GetString("NotDetected", language);
             this.WireNetworkConnectedLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WireNetworkConnectedLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.WireNetworkConnectedLabel.MouseDown += this.MainSCR_MouseDown;
+            this.WireNetworkConnectedLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
             // TimeOfSessionTimer
