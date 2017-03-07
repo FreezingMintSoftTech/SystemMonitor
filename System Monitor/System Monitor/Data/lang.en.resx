@@ -189,4 +189,7 @@
   <data name="WirelessLabel" xml:space="preserve">
     <value>Wireless Network</value>
   </data>
+  <data name="WireNetworkLabel" xml:space="preserve">
+    <value>Wire Network</value>
+  </data>
 </root>

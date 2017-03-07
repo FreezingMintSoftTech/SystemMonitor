@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Management;
 using System.Net.NetworkInformation;
 using Microsoft.Win32;
+using NativeWifi;
 
 namespace System_Monitor
 {
@@ -93,6 +94,7 @@ namespace System_Monitor
         private System.Windows.Forms.Label WirelessIPAddress;
         private System.Windows.Forms.Label WirelessIPObtainMethod;
         private System.Windows.Forms.Label WirelessIPSSID;
+        private System.Windows.Forms.Label WireNetworkLabel;
         private System.Windows.Forms.PictureBox CPUusageGraph;
         private System.Windows.Forms.PictureBox RAMusageGraph;
         private System.Windows.Forms.Timer TimeOfSessionTimer;
@@ -457,6 +459,18 @@ namespace System_Monitor
             this.WirelessIPSSID.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
 
             // 
+            // Label WireNetworkLabel
+            //
+            this.WireNetworkLabel = new System.Windows.Forms.Label();
+            this.WireNetworkLabel.Location = new System.Drawing.Point(3, 350);
+            this.WireNetworkLabel.Size = new System.Drawing.Size(105, 15);
+            this.WireNetworkLabel.Name = "WireNetworkLabel";
+            this.WireNetworkLabel.TabIndex = 1;
+            this.WireNetworkLabel.Text = res_man.GetString("WireNetworkLabel", language);
+            this.WireNetworkLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.WireNetworkLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+
+            // 
             // TimeOfSessionTimer
             // 
             this.components = new System.ComponentModel.Container();
@@ -518,7 +532,7 @@ namespace System_Monitor
             // 
             // Adding objects to Controls
             //  
-            this.Controls.AddRange(new Control[] { CloseButton, SettingsButton, HistoryButton, TimeOfSession, TitleLabel, LanguageLabel, OverallCPUusageLabel, OverallCPUusageValueLabel, VersionLabel, AuthorLabel, ProcessorNameLabel, ProcessorCoresLabel, ProcessorTemperatureLabel, CPUusageGraph, RAMusageGraph, OverallRAMMemoryLabel, PercentageRAMMemoryLabel, TotalRAMMemoryLabel, TotalRAMMemoryValueLabel, TotalRAMMemoryUsageLabel, TotalRAMMemoryUsageValueLabel, NetworkIntefacesTitle, WirelessLabel, WirelessIPAddress, WirelessIPSSID, WirelessIPObtainMethod });
+            this.Controls.AddRange(new Control[] { CloseButton, SettingsButton, HistoryButton, TimeOfSession, TitleLabel, LanguageLabel, OverallCPUusageLabel, OverallCPUusageValueLabel, VersionLabel, AuthorLabel, ProcessorNameLabel, ProcessorCoresLabel, ProcessorTemperatureLabel, CPUusageGraph, RAMusageGraph, OverallRAMMemoryLabel, PercentageRAMMemoryLabel, TotalRAMMemoryLabel, TotalRAMMemoryValueLabel, TotalRAMMemoryUsageLabel, TotalRAMMemoryUsageValueLabel, NetworkIntefacesTitle, WirelessLabel, WirelessIPAddress, WirelessIPSSID, WirelessIPObtainMethod, WireNetworkLabel });
 
             //
             // Adding Languages to Languages Menu
@@ -638,7 +652,8 @@ namespace System_Monitor
             this.TotalRAMMemoryLabel.Text = res_man.GetString("TotalRAMMemoryLabel", language);
             this.TotalRAMMemoryUsageLabel.Text = res_man.GetString("TotalRAMMemoryUsageLabel", language);
             this.NetworkIntefacesTitle.Text = res_man.GetString("NetworkIntefacesTitle", language);
-            this.WirelessLabel.Text = res_man.GetString("WirelessLabel", language); 
+            this.WirelessLabel.Text = res_man.GetString("WirelessLabel", language);
+            this.WireNetworkLabel.Text = res_man.GetString("WireNetworkLabel", language);
         }
 
         #endregion
@@ -822,7 +837,7 @@ namespace System_Monitor
         //
         //----Below is method for getting IP obtain method: Auto or Manual
         //
-        public string getIPObtainMethod()
+        public string getIPObtainForWirelessMethod()
         {
             string ObtainMethod = res_man.GetString("NotDetected", language);
             foreach (NetworkInterface adapter in nics)
@@ -849,6 +864,37 @@ namespace System_Monitor
 
             return ObtainMethod;
         }
+
+        #endregion
+        
+        #region GetWirelessSSID
+        //
+        //----In  this part there is a method to get wireless SSID using NativeWifi dll
+        //
+        public string getWirelessSSID()
+        {
+            WlanClient wlan = new WlanClient();   //WlanClient is class from NativeWifi
+            string SSIDret = res_man.GetString("NotDetected", language);
+
+            //
+            //----added try catch method because during changing of wireless network checking of ssid from NativeWiFi can throw an exception
+            //
+            try
+            {
+                foreach (WlanClient.WlanInterface wlanInterface in wlan.Interfaces)
+                {
+                    Wlan.Dot11Ssid ssid = wlanInterface.CurrentConnection.wlanAssociationAttributes.dot11Ssid;
+                    SSIDret = new string(Encoding.ASCII.GetChars(ssid.SSID, 0, (int)ssid.SSIDLength));
+                }
+            }
+            catch
+            {
+                SSIDret = res_man.GetString("NotDetected", language); ;
+            }
+
+            return SSIDret;
+        }
+
 
         #endregion
 
@@ -937,7 +983,9 @@ namespace System_Monitor
             nics = NetworkInterface.GetAllNetworkInterfaces();    //needed to get new info when user switch between networks
 
             this.WirelessIPAddress.Text = "IP: " + getWirelessNetworkIP();
-            this.WirelessIPObtainMethod.Text = "IP: " + getIPObtainMethod();
+            this.WirelessIPObtainMethod.Text = "IP: " + getIPObtainForWirelessMethod();
+            this.WirelessIPSSID.Text = "SSID: " + getWirelessSSID();
+
         }
 
         //

@@ -1,3 +1,9 @@
+------Version 0.0.22--------
+
+- added Managed WIFI library do solution from http://managedwifi.codeplex.com/
+- apply full funcionality to checking and displaying WirelessSSID
+- apply try catch method to getWirelessSSID because during changing network can throw an exception
+
 ------Version 0.0.21--------
 
 - Added WirelessObtainMethod label and aplly funcionality to check is IP address obtained automatically or manually set by user
