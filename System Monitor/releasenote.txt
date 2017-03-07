@@ -1,3 +1,9 @@
+------Version 0.0.23--------
+
+- added WireNetworkIPAddress label and apply full funcionality for checking ethernet IP address
+- added WireNetworkIPObtainMethod label and apply full funcionality for checking ethernet IP address obtain method
+- added WireNetworkConnected label and apply funcionality for checking is ethernet connection in UP state
+
 ------Version 0.0.22--------
 
 - added Managed WIFI library do solution from http://managedwifi.codeplex.com/
@@ -11,8 +17,8 @@
 ------Version 0.0.20--------
 
 - Added NetworkInterface label
-- Added WirelessNetwork label,
-- Added WirelessSSID label,
+- Added WirelessNetwork label
+- Added WirelessSSID label
 - Added WirelessIPAdress label and apply full funcionality with checking IP adress of wireless network
 
 ------Version 0.0.19--------

@@ -28,7 +28,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.22";   //Release number
+        public string release = " 0.0.23";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -95,6 +95,9 @@ namespace System_Monitor
         private System.Windows.Forms.Label WirelessIPObtainMethod;
         private System.Windows.Forms.Label WirelessIPSSID;
         private System.Windows.Forms.Label WireNetworkLabel;
+        private System.Windows.Forms.Label WireNetworkIPAddressLabel;
+        private System.Windows.Forms.Label WireNetworkIPObtainMethodLabel;
+        private System.Windows.Forms.Label WireNetworkConnectedLabel;
         private System.Windows.Forms.PictureBox CPUusageGraph;
         private System.Windows.Forms.PictureBox RAMusageGraph;
         private System.Windows.Forms.Timer TimeOfSessionTimer;
@@ -430,7 +433,7 @@ namespace System_Monitor
             this.WirelessIPAddress.Size = new System.Drawing.Size(105, 15);
             this.WirelessIPAddress.Name = "WirelessIPAddress";
             this.WirelessIPAddress.TabIndex = 1;
-            this.WirelessIPAddress.Text = "IP: " + res_man.GetString("NotDetected", language); ;
+            this.WirelessIPAddress.Text = "IP: " + res_man.GetString("NotDetected", language);
             this.WirelessIPAddress.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WirelessIPAddress.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
 
@@ -442,7 +445,7 @@ namespace System_Monitor
             this.WirelessIPObtainMethod.Size = new System.Drawing.Size(105, 15);
             this.WirelessIPObtainMethod.Name = "WirelessIPObtainMethod";
             this.WirelessIPObtainMethod.TabIndex = 1;
-            this.WirelessIPObtainMethod.Text = "IP: " + res_man.GetString("NotDetected", language); ;
+            this.WirelessIPObtainMethod.Text = "IP: " + res_man.GetString("NotDetected", language);
             this.WirelessIPObtainMethod.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WirelessIPObtainMethod.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
 
@@ -469,6 +472,42 @@ namespace System_Monitor
             this.WireNetworkLabel.Text = res_man.GetString("WireNetworkLabel", language);
             this.WireNetworkLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.WireNetworkLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+
+            // 
+            // Label WireNetworkIPAddressLabel
+            //
+            this.WireNetworkIPAddressLabel = new System.Windows.Forms.Label();
+            this.WireNetworkIPAddressLabel.Location = new System.Drawing.Point(3, 380);
+            this.WireNetworkIPAddressLabel.Size = new System.Drawing.Size(105, 15);
+            this.WireNetworkIPAddressLabel.Name = "WireNetworkIPAddressLabel";
+            this.WireNetworkIPAddressLabel.TabIndex = 1;
+            this.WireNetworkIPAddressLabel.Text = "IP: " + res_man.GetString("NotDetected", language);
+            this.WireNetworkIPAddressLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.WireNetworkIPAddressLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+
+            // 
+            // Label WireNetworkIPObtainMethodLabel
+            //
+            this.WireNetworkIPObtainMethodLabel = new System.Windows.Forms.Label();
+            this.WireNetworkIPObtainMethodLabel.Location = new System.Drawing.Point(3, 395);
+            this.WireNetworkIPObtainMethodLabel.Size = new System.Drawing.Size(105, 15);
+            this.WireNetworkIPObtainMethodLabel.Name = "WireNetworkIPObtainMethodLabel";
+            this.WireNetworkIPObtainMethodLabel.TabIndex = 1;
+            this.WireNetworkIPObtainMethodLabel.Text = "IP: " + res_man.GetString("NotDetected", language);
+            this.WireNetworkIPObtainMethodLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.WireNetworkIPObtainMethodLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+
+            // 
+            // Label WireNetworkConnectedLabel
+            //
+            this.WireNetworkConnectedLabel = new System.Windows.Forms.Label();
+            this.WireNetworkConnectedLabel.Location = new System.Drawing.Point(3, 365);
+            this.WireNetworkConnectedLabel.Size = new System.Drawing.Size(105, 15);
+            this.WireNetworkConnectedLabel.Name = "WireNetworkConnectedLabel";
+            this.WireNetworkConnectedLabel.TabIndex = 1;
+            this.WireNetworkConnectedLabel.Text = res_man.GetString("Connected", language) + ": " + res_man.GetString("NotDetected", language);
+            this.WireNetworkConnectedLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.WireNetworkConnectedLabel.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
 
             // 
             // TimeOfSessionTimer
@@ -532,7 +571,7 @@ namespace System_Monitor
             // 
             // Adding objects to Controls
             //  
-            this.Controls.AddRange(new Control[] { CloseButton, SettingsButton, HistoryButton, TimeOfSession, TitleLabel, LanguageLabel, OverallCPUusageLabel, OverallCPUusageValueLabel, VersionLabel, AuthorLabel, ProcessorNameLabel, ProcessorCoresLabel, ProcessorTemperatureLabel, CPUusageGraph, RAMusageGraph, OverallRAMMemoryLabel, PercentageRAMMemoryLabel, TotalRAMMemoryLabel, TotalRAMMemoryValueLabel, TotalRAMMemoryUsageLabel, TotalRAMMemoryUsageValueLabel, NetworkIntefacesTitle, WirelessLabel, WirelessIPAddress, WirelessIPSSID, WirelessIPObtainMethod, WireNetworkLabel });
+            this.Controls.AddRange(new Control[] { CloseButton, SettingsButton, HistoryButton, TimeOfSession, TitleLabel, LanguageLabel, OverallCPUusageLabel, OverallCPUusageValueLabel, VersionLabel, AuthorLabel, ProcessorNameLabel, ProcessorCoresLabel, ProcessorTemperatureLabel, CPUusageGraph, RAMusageGraph, OverallRAMMemoryLabel, PercentageRAMMemoryLabel, TotalRAMMemoryLabel, TotalRAMMemoryValueLabel, TotalRAMMemoryUsageLabel, TotalRAMMemoryUsageValueLabel, NetworkIntefacesTitle, WirelessLabel, WirelessIPAddress, WirelessIPSSID, WirelessIPObtainMethod, WireNetworkLabel, WireNetworkIPAddressLabel, WireNetworkIPObtainMethodLabel, WireNetworkConnectedLabel });
 
             //
             // Adding Languages to Languages Menu
@@ -832,7 +871,7 @@ namespace System_Monitor
 
         #endregion
 
-        #region GetIPObtainMethod
+        #region GetIPObtainForWirelessMethod
 
         //
         //----Below is method for getting IP obtain method: Auto or Manual
@@ -887,7 +926,7 @@ namespace System_Monitor
                     SSIDret = new string(Encoding.ASCII.GetChars(ssid.SSID, 0, (int)ssid.SSIDLength));
                 }
             }
-            catch
+            catch //if exception thrown during changing of wifi
             {
                 SSIDret = res_man.GetString("NotDetected", language); ;
             }
@@ -895,6 +934,96 @@ namespace System_Monitor
             return SSIDret;
         }
 
+
+        #endregion
+
+        #region GetWireNetworkIP
+        //
+        //----Below is method for getting Wire IP Address
+        //
+        public string GetWireNetworkIP()
+        {
+            string IP = res_man.GetString("NotDetected", language);
+            foreach (NetworkInterface adapter in nics)
+            {
+                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    foreach (UnicastIPAddressInformation ip in adapter.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            IP = ip.Address.ToString();
+                        }
+                    }
+                }
+
+            }
+
+            return IP;
+        }
+
+        #endregion
+
+        #region GetIPObtainForWireMethod
+        //
+        //----Below is part for checking IP obtain method for Ethernet: Auto or Manual
+        //
+        public string getIPObtainForWireMethod()
+        {
+            string ObtainMethod = res_man.GetString("NotDetected", language);
+            foreach (NetworkInterface adapter in nics)
+            {
+                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    foreach (UnicastIPAddressInformation ip in adapter.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            IPInterfaceProperties properties = adapter.GetIPProperties();
+                            if (properties.GetIPv4Properties().IsDhcpEnabled)
+                            {
+                                ObtainMethod = res_man.GetString("IPAutoObtain", language);
+                            }
+                            else
+                            {
+                                ObtainMethod = res_man.GetString("IPManualObtain", language);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return ObtainMethod;
+        }
+
+
+        #endregion
+
+        #region CheckIsWireNetworkConnected
+        //
+        //----
+        //
+        public string IsWireNetworkConnected()
+        {
+            string IsConnected = res_man.GetString("NotDetected", language);
+            foreach (NetworkInterface adapter in nics)
+            {
+                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    if (adapter.OperationalStatus == OperationalStatus.Up)
+                    {
+                        IsConnected = res_man.GetString("Yes", language);
+                    }
+                    else
+                    {
+                        IsConnected = res_man.GetString("No", language);
+                    }
+                }
+
+            }
+
+            return IsConnected;
+        }
 
         #endregion
 
@@ -985,7 +1114,9 @@ namespace System_Monitor
             this.WirelessIPAddress.Text = "IP: " + getWirelessNetworkIP();
             this.WirelessIPObtainMethod.Text = "IP: " + getIPObtainForWirelessMethod();
             this.WirelessIPSSID.Text = "SSID: " + getWirelessSSID();
-
+            this.WireNetworkIPAddressLabel.Text = "IP: " + GetWireNetworkIP();
+            this.WireNetworkIPObtainMethodLabel.Text = "IP: " + getIPObtainForWireMethod();
+            this.WireNetworkConnectedLabel.Text = res_man.GetString("Connected", language) + ": " + IsWireNetworkConnected(); 
         }
 
         //

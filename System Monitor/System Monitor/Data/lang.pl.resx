@@ -192,4 +192,13 @@
   <data name="WireNetworkLabel" xml:space="preserve">
     <value>Przewodowy</value>
   </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Połączono</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Tak</value>
+  </data>
 </root>
