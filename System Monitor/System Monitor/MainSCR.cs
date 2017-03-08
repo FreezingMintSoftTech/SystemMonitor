@@ -28,7 +28,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.24";   //Release number
+        public string release = " 0.0.25";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -613,7 +613,7 @@ namespace System_Monitor
             // 
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.TrayIcon.Text = "System Monitor";
-            this.TrayIcon.Visible = false;
+            this.TrayIcon.Visible = true;
             this.TrayIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.TrayIcon.BalloonTipText = res_man.GetString("TrayIconBalloonTipText", language);
             this.TrayIcon.BalloonTipTitle = "System Monitor";
@@ -757,9 +757,8 @@ namespace System_Monitor
         //MainSCR Event - when form is Resize
         private void MainSCR_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized) //If MainSCR is minimized then activate TrayIcon
+            if (this.WindowState == FormWindowState.Minimized) //If MainSCR is minimized then show balloonTip 
             {
-                TrayIcon.Visible = true;
                 TrayIcon.ShowBalloonTip(500);                    
             }           
         }
@@ -767,9 +766,15 @@ namespace System_Monitor
         //Click on TrayIcon event
         private void TrayIcon_Click(object sender, EventArgs e)
         {
-            Show();
-            this.WindowState = FormWindowState.Normal;           
-            TrayIcon.Visible = false;
+            if (this.WindowState == FormWindowState.Minimized) //If MainSCR is minimized then show it and change window state to normal
+            {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }   
+            else   //if window state is not minimized then bring app to front
+            {
+                this.Activate();
+            }                      
         }
 
         #endregion
