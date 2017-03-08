@@ -28,7 +28,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.25";   //Release number
+        public string release = " 0.0.26";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -103,8 +103,11 @@ namespace System_Monitor
         private System.Windows.Forms.Timer TimeOfSessionTimer;
         private System.Windows.Forms.Timer Time1SecTimer;
         private System.Windows.Forms.ContextMenuStrip LanguagesMenu;
+        private System.Windows.Forms.ContextMenu TrayIconMenu;
         private System.Windows.Forms.ToolStripButton LanguagesMenuLangEN;
         private System.Windows.Forms.ToolStripButton LanguagesMenuLangPL;
+        private System.Windows.Forms.MenuItem TrayIconMenuShow;
+        private System.Windows.Forms.MenuItem TrayIconMenuClose;
         private System.Windows.Forms.NotifyIcon TrayIcon;
         //----End of defining objects on this form
 
@@ -580,6 +583,35 @@ namespace System_Monitor
             Time1SecTimer.Enabled = true;
 
             // 
+            // TrayIconMenu
+            // 
+            this.TrayIconMenu = new System.Windows.Forms.ContextMenu();
+            
+            // 
+            // TrayIconMenuShow
+            // 
+            this.TrayIconMenuShow = new System.Windows.Forms.MenuItem();
+            this.TrayIconMenuShow.Index = 0;            
+            this.TrayIconMenuShow.Text = res_man.GetString("Show", language);
+            this.TrayIconMenuShow.Click += TrayIcon_Click;
+
+            // 
+            // TrayIconMenuClose
+            // 
+            this.TrayIconMenuClose = new System.Windows.Forms.MenuItem();
+            this.TrayIconMenuClose.Index = 1;            
+            this.TrayIconMenuClose.Text = res_man.GetString("CloseButton", language);
+            this.TrayIconMenuClose.Click += CloseProgram_Click;
+
+
+            //
+            // Adding options to TrayIcon Menu
+            //        
+            this.TrayIconMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.TrayIconMenuShow,
+            this.TrayIconMenuClose});
+
+            // 
             // LanguagesMenu
             // 
             this.LanguagesMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -619,6 +651,7 @@ namespace System_Monitor
             this.TrayIcon.BalloonTipTitle = "System Monitor";
             this.TrayIcon.Icon = new System.Drawing.Icon("GFX/Icon1.ico");
             this.TrayIcon.Click += TrayIcon_Click;
+            this.TrayIcon.ContextMenu = this.TrayIconMenu;
                        
             // 
             // Adding objects to Controls
@@ -745,6 +778,8 @@ namespace System_Monitor
             this.NetworkIntefacesTitle.Text = res_man.GetString("NetworkIntefacesTitle", language);
             this.WirelessLabel.Text = res_man.GetString("WirelessLabel", language);
             this.WireNetworkLabel.Text = res_man.GetString("WireNetworkLabel", language);
+            this.TrayIconMenuShow.Text = res_man.GetString("Show", language);
+            this.TrayIconMenuClose.Text = res_man.GetString("CloseButton", language);
         }
 
         #endregion
@@ -775,6 +810,11 @@ namespace System_Monitor
             {
                 this.Activate();
             }                      
+        }
+
+        private void CloseProgram_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         #endregion

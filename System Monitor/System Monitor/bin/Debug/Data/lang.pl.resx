@@ -201,4 +201,7 @@
   <data name="Yes" xml:space="preserve">
     <value>Tak</value>
   </data>
+  <data name="Show" xml:space="preserve">
+    <value>Pokaż</value>
+  </data>
 </root>
