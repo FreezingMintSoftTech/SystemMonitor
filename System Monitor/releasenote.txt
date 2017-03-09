@@ -1,3 +1,10 @@
+------Version 0.0.27--------
+
+- Created Form Settings
+- Aplly funcionality to open form Settings modal after clicking Settings button on MainSCR
+- Created button Cancel on Settings form
+- Created button Save on Settings form
+
 ------Version 0.0.26--------
 
 - created TrayIcon Menu with two button Show and Close and apply full funcionality for this buttons

@@ -28,7 +28,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.26";   //Release number
+        public string release = " 0.0.27";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -1143,7 +1143,8 @@ namespace System_Monitor
         //
         void SettingsButton_Click(object sender, EventArgs e)   //SettingsButton Click Event
         {
-            Close();
+            SettingsSCR frm = new SettingsSCR(language, MainSCRLocationX, MainSCRLocationY, this.Width, this.Height);
+            frm.ShowDialog();
         }
 
         //

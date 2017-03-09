@@ -204,4 +204,13 @@
   <data name="Show" xml:space="preserve">
     <value>Show</value>
   </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SettingsSCRTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

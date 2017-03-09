@@ -94,6 +94,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsSCR.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="Data\lang.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>lang.en.Designer.cs</LastGenOutput>
