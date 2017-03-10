@@ -1,3 +1,11 @@
+------Version 0.0.28--------
+
+- Created Language Label on SettingsSCR
+- Created Languages Combo Box on SettingsSCR
+- Applied laguages EN and PL to Languages Combo Box
+- Applied funcionality to change languages to Save Button on SettingsSCR
+- Created new funcions on MainSCR for changing languages EN and PL, these funcions are called from Save button at SettingsSCR
+
 ------Version 0.0.27--------
 
 - Created Form Settings

@@ -28,7 +28,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.27";   //Release number
+        public string release = " 0.0.28";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -77,7 +77,7 @@ namespace System_Monitor
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label OverallCPUusageLabel;
         private System.Windows.Forms.Label OverallCPUusageValueLabel;
-        private System.Windows.Forms.Label LanguageLabel;
+        //private System.Windows.Forms.Label LanguageLabel;  //after version 0.0.28 languages change is not anymore on MainSCR, changing language is from SettingSCR
         private System.Windows.Forms.Label VersionLabel;
         private System.Windows.Forms.Label AuthorLabel;
         private System.Windows.Forms.Label ProcessorNameLabel;
@@ -102,10 +102,10 @@ namespace System_Monitor
         private System.Windows.Forms.PictureBox RAMusageGraph;
         private System.Windows.Forms.Timer TimeOfSessionTimer;
         private System.Windows.Forms.Timer Time1SecTimer;
-        private System.Windows.Forms.ContextMenuStrip LanguagesMenu;
+        //private System.Windows.Forms.ContextMenuStrip LanguagesMenu; //after version 0.0.28 languages change is not anymore on MainSCR, changing language is from SettingSCR
         private System.Windows.Forms.ContextMenu TrayIconMenu;
-        private System.Windows.Forms.ToolStripButton LanguagesMenuLangEN;
-        private System.Windows.Forms.ToolStripButton LanguagesMenuLangPL;
+        //private System.Windows.Forms.ToolStripButton LanguagesMenuLangEN; //after version 0.0.28 languages change is not anymore on MainSCR, changing language is from SettingSCR
+        //private System.Windows.Forms.ToolStripButton LanguagesMenuLangPL; //after version 0.0.28 languages change is not anymore on MainSCR, changing language is from SettingSCR
         private System.Windows.Forms.MenuItem TrayIconMenuShow;
         private System.Windows.Forms.MenuItem TrayIconMenuClose;
         private System.Windows.Forms.NotifyIcon TrayIcon;
@@ -237,15 +237,15 @@ namespace System_Monitor
             this.OverallCPUusageValueLabel.MouseMove += this.MainSCR_MouseMove;
 
             // 
-            // Label LanguageLabel
+            // Label LanguageLabel    //after version 0.0.28 languages change is not anymore on MainSCR, changing language is from SettingSCR
             //  
-            this.LanguageLabel = new System.Windows.Forms.Label();
-            this.LanguageLabel.Location = new System.Drawing.Point(120, 420);
-            this.LanguageLabel.Name = "LanguageLabel";
-            this.LanguageLabel.TabIndex = 1;
-            this.LanguageLabel.Text = res_man.GetString("LanguageXX", language);
-            this.LanguageLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.LanguageLabel.Click += LanguageLabel_Click;
+            //this.LanguageLabel = new System.Windows.Forms.Label();
+            //this.LanguageLabel.Location = new System.Drawing.Point(120, 420);
+            //this.LanguageLabel.Name = "LanguageLabel";
+            //this.LanguageLabel.TabIndex = 1;
+            //this.LanguageLabel.Text = res_man.GetString("LanguageXX", language);
+            //this.LanguageLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            //this.LanguageLabel.Click += LanguageLabel_Click;
 
             // 
             // Label VersionLabel
@@ -612,33 +612,33 @@ namespace System_Monitor
             this.TrayIconMenuClose});
 
             // 
-            // LanguagesMenu
+            // LanguagesMenu    //after version 0.0.28 languages change is not anymore on MainSCR, changing language is from SettingSCR
             // 
-            this.LanguagesMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.LanguagesMenu.BackColor = System.Drawing.SystemColors.Menu;
-            this.LanguagesMenu.Name = "contextMenuStrip1";
-            this.LanguagesMenu.Size = new System.Drawing.Size(161, 76);
-            this.LanguagesMenu.Text = "Langu";
+            //this.LanguagesMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            //this.LanguagesMenu.BackColor = System.Drawing.SystemColors.Menu;
+            //this.LanguagesMenu.Name = "contextMenuStrip1";
+            //this.LanguagesMenu.Size = new System.Drawing.Size(161, 76);
+            //this.LanguagesMenu.Text = "Langu";
 
             // 
-            // LanguagesMenuLangEN
+            // LanguagesMenuLangEN    //after version 0.0.28 languages change is not anymore on MainSCR, changing language is from SettingSCR
             // 
-            this.LanguagesMenuLangEN = new System.Windows.Forms.ToolStripButton();
-            this.LanguagesMenuLangEN.BackColor = System.Drawing.SystemColors.Menu;
-            this.LanguagesMenuLangEN.Name = "LanguagesMenuLangEN";
-            this.LanguagesMenuLangEN.Size = new System.Drawing.Size(100, 23);
-            this.LanguagesMenuLangEN.Text = "EN";
-            this.LanguagesMenuLangEN.Click += LanguagesMenuLangEN_Click;   
+            //this.LanguagesMenuLangEN = new System.Windows.Forms.ToolStripButton();
+            //this.LanguagesMenuLangEN.BackColor = System.Drawing.SystemColors.Menu;
+            //this.LanguagesMenuLangEN.Name = "LanguagesMenuLangEN";
+            //this.LanguagesMenuLangEN.Size = new System.Drawing.Size(100, 23);
+            //this.LanguagesMenuLangEN.Text = "EN";
+            //this.LanguagesMenuLangEN.Click += LanguagesMenuLangEN_Click;   
 
             // 
-            // LanguagesMenuLangPL
+            // LanguagesMenuLangPL    //after version 0.0.28 languages change is not anymore on MainSCR, changing language is from SettingSCR
             // 
-            this.LanguagesMenuLangPL = new System.Windows.Forms.ToolStripButton();
-            this.LanguagesMenuLangPL.BackColor = System.Drawing.SystemColors.Menu;
-            this.LanguagesMenuLangPL.Name = "LanguagesMenuLangPL";
-            this.LanguagesMenuLangPL.Size = new System.Drawing.Size(100, 23);
-            this.LanguagesMenuLangPL.Text = "PL";
-            this.LanguagesMenuLangPL.Click += LanguagesMenuLangPL_Click;
+            //this.LanguagesMenuLangPL = new System.Windows.Forms.ToolStripButton();
+            //this.LanguagesMenuLangPL.BackColor = System.Drawing.SystemColors.Menu;
+            //this.LanguagesMenuLangPL.Name = "LanguagesMenuLangPL";
+            //this.LanguagesMenuLangPL.Size = new System.Drawing.Size(100, 23);
+            //this.LanguagesMenuLangPL.Text = "PL";
+            //this.LanguagesMenuLangPL.Click += LanguagesMenuLangPL_Click;
 
             // 
             // TrayIcon
@@ -656,16 +656,16 @@ namespace System_Monitor
             // 
             // Adding objects to Controls
             //  
-            this.Controls.AddRange(new Control[] { CloseButton, SettingsButton, HistoryButton, TimeOfSession, TitleLabel, LanguageLabel, OverallCPUusageLabel, OverallCPUusageValueLabel, VersionLabel, AuthorLabel, ProcessorNameLabel, ProcessorCoresLabel, ProcessorTemperatureLabel, CPUusageGraph, RAMusageGraph, OverallRAMMemoryLabel, PercentageRAMMemoryLabel, TotalRAMMemoryLabel, TotalRAMMemoryValueLabel, TotalRAMMemoryUsageLabel, TotalRAMMemoryUsageValueLabel, NetworkIntefacesTitle, WirelessLabel, WirelessIPAddress, WirelessIPSSID, WirelessIPObtainMethod, WireNetworkLabel, WireNetworkIPAddressLabel, WireNetworkIPObtainMethodLabel, WireNetworkConnectedLabel });
+            this.Controls.AddRange(new Control[] { CloseButton, SettingsButton, HistoryButton, TimeOfSession, TitleLabel, OverallCPUusageLabel, OverallCPUusageValueLabel, VersionLabel, AuthorLabel, ProcessorNameLabel, ProcessorCoresLabel, ProcessorTemperatureLabel, CPUusageGraph, RAMusageGraph, OverallRAMMemoryLabel, PercentageRAMMemoryLabel, TotalRAMMemoryLabel, TotalRAMMemoryValueLabel, TotalRAMMemoryUsageLabel, TotalRAMMemoryUsageValueLabel, NetworkIntefacesTitle, WirelessLabel, WirelessIPAddress, WirelessIPSSID, WirelessIPObtainMethod, WireNetworkLabel, WireNetworkIPAddressLabel, WireNetworkIPObtainMethodLabel, WireNetworkConnectedLabel });
 
             //
-            // Adding Languages to Languages Menu
+            // Adding Languages to Languages Menu  //after version 0.0.28 languages change is not anymore on MainSCR, changing language is from SettingSCR
             //        
-            this.LanguagesMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LanguagesMenuLangEN,
-            this.LanguagesMenuLangPL});
-            this.LanguagesMenu.ResumeLayout(false);
-            this.LanguagesMenu.PerformLayout();
+            //this.LanguagesMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            //this.LanguagesMenuLangEN,
+            //this.LanguagesMenuLangPL});
+            //this.LanguagesMenu.ResumeLayout(false);
+            //this.LanguagesMenu.PerformLayout();
             this.ResumeLayout(false);
         }
 
@@ -757,7 +757,7 @@ namespace System_Monitor
         private void ChangeLanguage()
         {
             //LoadUserDataParametersXML(); --this coused stack overflow error because of loading starting language, should be deleted if no new errors/bugs detected
-            this.LanguageLabel.Text = res_man.GetString("LanguageXX", language);
+            //this.LanguageLabel.Text = res_man.GetString("LanguageXX", language);  //after version 0.0.28 languages change is not anymore on MainSCR, changing language is from SettingSCR
             this.VersionLabel.Text = res_man.GetString("VersionLabel", language) + release;
             //this.TimeOfSession.Text = res_man.GetString("CurrentSessionLasts", language) + " " + TimeOfSessionInt.ToString() + " " + res_man.GetString("Minutes", language);
             ShowActualSessionTime();   //Showing actual session time
@@ -1296,17 +1296,24 @@ namespace System_Monitor
         }
 
         //
-        // Click event for LanguageLabel
+        // Click event for LanguageLabel    //after version 0.0.28 LanguageLabel is not anymore at MainSCR
         //
-        private void LanguageLabel_Click(object sender, EventArgs e)
-        {
-            LanguagesMenu.Show(this.Location.X + LanguageLabel.Location.X, this.Location.Y + LanguageLabel.Location.Y);
-        }
+        //private void LanguageLabel_Click(object sender, EventArgs e)  //old funcionality, from version 0.0.28 changing lang is from SettingsSCR
+        //{
+        //    LanguagesMenu.Show(this.Location.X + LanguageLabel.Location.X, this.Location.Y + LanguageLabel.Location.Y);
+        //}
 
         //
         // Click event for choosing English Language
         //
-        private void LanguagesMenuLangEN_Click(object sender, EventArgs e)
+
+        //public void LanguagesMenuLangEN_Click(object sender, EventArgs e)   //old funcionality, from version 0.0.28 changing lang is from SettingsSCR
+        //{
+        //    language = CultureInfo.CreateSpecificCulture("en");
+        //    ChangeLanguage();
+        //}
+
+        public void LanguagesMenuLangEN_Change()
         {
             language = CultureInfo.CreateSpecificCulture("en");
             ChangeLanguage();
@@ -1314,7 +1321,14 @@ namespace System_Monitor
         //
         // Click event for choosing Polish Language
         //
-        private void LanguagesMenuLangPL_Click(object sender, EventArgs e)
+
+        //public void LanguagesMenuLangPL_Click(object sender, EventArgs e)   //old funcionality, from version 0.0.28 changing lang is from SettingsSCR
+        //{
+        //    language = CultureInfo.CreateSpecificCulture("pl");
+        //    ChangeLanguage();
+        //}
+
+        public void LanguagesMenuLangPL_Change()
         {
             language = CultureInfo.CreateSpecificCulture("pl");
             ChangeLanguage();

@@ -26,7 +26,7 @@ namespace System_Monitor
         //Languages Variables
         ResourceManager res_man = new ResourceManager("System_Monitor.Data.lang", typeof(MainSCR).Assembly);    // declare Resource manager to access to specific cultureinfo
         CultureInfo language = CultureInfo.CreateSpecificCulture("en");       // declare culture info, this var is for choosing specyfic language
-
+                
         #endregion
 
         #region FormAppearance&MainProgram
@@ -35,6 +35,8 @@ namespace System_Monitor
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Label SettingsSCRTitle;
+        private System.Windows.Forms.Label LanguageLabel;
+        private System.Windows.Forms.ComboBox LanguagesComboBox;
         //----End of defining objects on this form
 
         public SettingsSCR(CultureInfo langH, int MainSCRX, int MainSCRY, int MainSCRWidth, int MainSCRHeight)
@@ -101,15 +103,54 @@ namespace System_Monitor
             this.SettingsSCRTitle.Size = new System.Drawing.Size(218, 22);
             this.SettingsSCRTitle.Text = res_man.GetString("SettingsSCRTitle", language);
             this.SettingsSCRTitle.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 12);
-            this.SettingsSCRTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter; 
+            this.SettingsSCRTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+
+            // 
+            // Label LanguageLabel
+            // 
+            this.LanguageLabel = new System.Windows.Forms.Label();
+            this.LanguageLabel.Location = new System.Drawing.Point(40, 40);
+            this.LanguageLabel.Name = "LanguageLabel";
+            this.LanguageLabel.TabIndex = 1;
+            this.LanguageLabel.Text = res_man.GetString("LanguageXX", language);
+            this.LanguageLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+
+            //
+            // List langs for displaying in combobox LanguagesComboBox
+            //
+            List<string> langs = new List<string>();
+
+            langs.Add(res_man.GetString("LangShortXX", language));   //at first position we are showing actual language
+
+            //then we are checking what is actual language and we are showing other languages on next positions
+
+            //Below for PL language
+            if (res_man.GetString("LangShortXX", language).Equals("PL"))
+            langs.Add(res_man.GetString("LangShortXX", CultureInfo.CreateSpecificCulture("en")));
+            //Below for EN language
+            if (res_man.GetString("LangShortXX", language).Equals("EN"))
+            langs.Add(res_man.GetString("LangShortXX", CultureInfo.CreateSpecificCulture("pl")));          
+            
+            
+            // 
+            // LanguagesComboBox
+            // 
+            this.LanguagesComboBox = new System.Windows.Forms.ComboBox();
+            this.LanguagesComboBox.FormattingEnabled = true;
+            this.LanguagesComboBox.Location = new System.Drawing.Point(150, 38);
+            this.LanguagesComboBox.Name = "LanguagesComboBox";
+            this.LanguagesComboBox.Size = new System.Drawing.Size(60, 24);
+            this.LanguagesComboBox.TabIndex = 3;            
+            this.LanguagesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.LanguagesComboBox.DataSource = langs;            
 
             // 
             // Adding objects to Controls
             //  
-            this.Controls.AddRange(new Control[] { CancelButton, SaveButton, SettingsSCRTitle });
+            this.Controls.AddRange(new Control[] { CancelButton, SaveButton, SettingsSCRTitle, LanguageLabel, LanguagesComboBox });
         }
 
-        #endregion
+        #endregion       
 
         #region ProgramEvents
 
@@ -130,6 +171,33 @@ namespace System_Monitor
         //
         void SaveButton_Click(object sender, EventArgs e)   //SaveButton Click Event
         {
+            //
+            //----After button Save click we are checking all fields in settings and applying this settings to MainSCR
+            //
+
+            //
+            //----Checking what language is selected and applying this setting to MainSCR
+            //
+
+            //Language EN
+            if (this.LanguagesComboBox.SelectedItem.Equals("EN"))
+            {
+                if (System.Windows.Forms.Application.OpenForms["MainSCR"] != null)
+                {
+                    (System.Windows.Forms.Application.OpenForms["MainSCR"] as MainSCR).LanguagesMenuLangEN_Change();
+                }
+            }
+
+            //Language PL
+            if (this.LanguagesComboBox.SelectedItem.Equals("PL"))
+            {
+                if (System.Windows.Forms.Application.OpenForms["MainSCR"] != null)
+                {
+                    (System.Windows.Forms.Application.OpenForms["MainSCR"] as MainSCR).LanguagesMenuLangPL_Change();
+                }
+            }     
+
+            //After all settings are applied form SettingsSCR can be closed
             Close();
         }
 

@@ -142,7 +142,7 @@
     <value>Manual</value>
   </data>
   <data name="LanguageXX" xml:space="preserve">
-    <value>Language EN</value>
+    <value>Language:</value>
   </data>
   <data name="Minutes" xml:space="preserve">
     <value>min</value>
@@ -212,5 +212,8 @@
   </data>
   <data name="SettingsSCRTitle" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="LangShortXX" xml:space="preserve">
+    <value>EN</value>
   </data>
 </root>
