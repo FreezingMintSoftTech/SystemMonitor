@@ -216,4 +216,7 @@
   <data name="LangShortXX" xml:space="preserve">
     <value>PL</value>
   </data>
+  <data name="SessionsHistoryButton" xml:space="preserve">
+    <value>Historia Sesji</value>
+  </data>
 </root>

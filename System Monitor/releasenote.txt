@@ -1,3 +1,7 @@
+------Version 0.0.29--------
+
+- Created SessionsHistory Button on HistorySCR, currently without funcionality
+
 ------Version 0.0.28--------
 
 - Created Language Label on SettingsSCR

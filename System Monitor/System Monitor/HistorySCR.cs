@@ -33,6 +33,7 @@ namespace System_Monitor
 
         //----Below defining further objects on this form
         private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.Button SessionsHistoryButton;
         private System.Windows.Forms.Label HistorySCRTitle;
         //----End of defining objects on this form
 
@@ -80,6 +81,20 @@ namespace System_Monitor
             this.CloseButton.Click += CloseButton_Click;
 
             // 
+            // SessionsHistoryButton
+            //  
+            this.SessionsHistoryButton = new System.Windows.Forms.Button();
+            this.SessionsHistoryButton.Visible = true;
+            this.SessionsHistoryButton.Location = new System.Drawing.Point(427, 10);
+            this.SessionsHistoryButton.Name = "SessionsHistoryButton";
+            this.SessionsHistoryButton.Size = new System.Drawing.Size(70, 40);
+            this.SessionsHistoryButton.Text = res_man.GetString("SessionsHistoryButton", language);
+            this.SessionsHistoryButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.SessionsHistoryButton.UseVisualStyleBackColor = true;
+            this.SessionsHistoryButton.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.Serif), 7);
+            this.SessionsHistoryButton.Click += SessionsHistoryButton_Click;
+
+            // 
             // Label HistorySCRTitle
             //
             this.HistorySCRTitle = new System.Windows.Forms.Label();
@@ -93,7 +108,7 @@ namespace System_Monitor
             // 
             // Adding objects to Controls
             //  
-            this.Controls.AddRange(new Control[] { CloseButton, HistorySCRTitle });
+            this.Controls.AddRange(new Control[] { CloseButton, HistorySCRTitle, SessionsHistoryButton });
         }
 
         #endregion
@@ -108,6 +123,14 @@ namespace System_Monitor
         // CloseButton Click Event
         //
         void CloseButton_Click(object sender, EventArgs e)   //CloseButton Click Event
+        {
+            Close();
+        }
+
+        //
+        // SessionsHistoryButton Click Event
+        //
+        void SessionsHistoryButton_Click(object sender, EventArgs e)   //SessionsHistoryButton Click Event
         {
             Close();
         }
