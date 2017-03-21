@@ -28,7 +28,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.29";   //Release number
+        public string release = " 0.0.30";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -63,6 +63,10 @@ namespace System_Monitor
         //Network Interfaces Variables
         IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
         NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+
+        //Database SMuserDB variables
+        DatabaseConnection SMuserDB_Connection;
+        string conString;
 
         #endregion
 
@@ -1389,6 +1393,62 @@ namespace System_Monitor
             ProcessorName = getCPUName().ToString();
             //And applying it to ProcessorNameLabel
             this.ProcessorNameLabel.Text = res_man.GetString("ProcessorNameLabel", language) + ProcessorName;  //must be done during loading to see it after startup
+
+            //Database SMuserDB connection startup
+            try
+            {
+                //
+                //On startup of application we need to check if there is already record for actual date in SessionsTable
+                //If there is no record for actual date we need to create new, if there is already record for actual date we need to increment
+                //number of sessions parameter
+
+                SMuserDB_Connection = new DatabaseConnection();
+                conString = Properties.Settings.Default.SMuserDBConnectionString;
+
+                string ActualDate = DateTime.Today.ToString();
+                System.Data.DataSet QueryResult;
+
+                SMuserDB_Connection.connection_string = conString;
+
+                //---tutaj sugerowana przerwa try i zrobienie catcha z error: problem with DB startup
+                //---poniżej zrobienie nowego try i catch z errorem na niewykonanie zapytania sql
+
+                //Take all records from SessionsTable
+                SMuserDB_Connection.Sql_Query = "SELECT * from SessionsTable"; 
+
+                QueryResult = SMuserDB_Connection.GetConnection;   //Assign all this records to QueryResult
+                string searchExpression = "Date = '" + ActualDate +"'";   //search query for actual date
+
+                //Searching for actual date in SessionsTable
+                System.Data.DataRow[] foundrows = QueryResult.Tables[0].Select(searchExpression);  
+                //If there is no record for actual date in SessionsTable we need to create a new one
+                if (foundrows.Length == 0)
+                {
+                    //Preparing new row for the database
+                    System.Data.DataRow NewRow = QueryResult.Tables[0].NewRow();
+                    NewRow[1] = ActualDate.ToString();
+                    NewRow[2] = 0;
+                    NewRow[3] = 1;
+                    QueryResult.Tables[0].Rows.Add(NewRow);
+
+                    SMuserDB_Connection.UpdateDatabase(QueryResult);
+
+                    MessageBox.Show("OK:" + QueryResult.Tables[0].Rows[1].ToString()); //sprawdzenie czy program wszedł do pętli
+                }               
+
+                //System.Data.DataRow DRow = QueryResult.Tables[0].Rows[0];
+                //MessageBox.Show("OK:" + foundrows.ToString());
+                //int test = Int32.Parse(DRow.ItemArray.GetValue(1).ToString());
+
+                //if (test == 0)
+                //{
+                //    MessageBox.Show("OK");
+                //}
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("ERROR: " + err.Message);
+            }
         }
 
         //
