@@ -1,3 +1,7 @@
+------Version 0.0.31--------
+
+- At startup program is checking if record for actual date exist and increment QuantityOfSessions in SessionsTable if exist
+
 ------Version 0.0.30--------
 
 - Created connection to SMuserDB

@@ -28,7 +28,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.30";   //Release number
+        public string release = " 0.0.31";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -1397,21 +1397,27 @@ namespace System_Monitor
             //Database SMuserDB connection startup
             try
             {
+                // Try for startup connection with SMuserDB
+
+                SMuserDB_Connection = new DatabaseConnection();
+                conString = Properties.Settings.Default.SMuserDBConnectionString;                
+
+                SMuserDB_Connection.connection_string = conString;                
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error during SMuserDB startup: " + err.Message);
+            }
+
+            try
+            {
                 //
                 //On startup of application we need to check if there is already record for actual date in SessionsTable
                 //If there is no record for actual date we need to create new, if there is already record for actual date we need to increment
                 //number of sessions parameter
 
-                SMuserDB_Connection = new DatabaseConnection();
-                conString = Properties.Settings.Default.SMuserDBConnectionString;
-
                 string ActualDate = DateTime.Today.ToString();
-                System.Data.DataSet QueryResult;
-
-                SMuserDB_Connection.connection_string = conString;
-
-                //---tutaj sugerowana przerwa try i zrobienie catcha z error: problem with DB startup
-                //---poniżej zrobienie nowego try i catch z errorem na niewykonanie zapytania sql
+                System.Data.DataSet QueryResult;                
 
                 //Take all records from SessionsTable
                 SMuserDB_Connection.Sql_Query = "SELECT * from SessionsTable"; 
@@ -1420,7 +1426,8 @@ namespace System_Monitor
                 string searchExpression = "Date = '" + ActualDate +"'";   //search query for actual date
 
                 //Searching for actual date in SessionsTable
-                System.Data.DataRow[] foundrows = QueryResult.Tables[0].Select(searchExpression);  
+                System.Data.DataRow[] foundrows = QueryResult.Tables[0].Select(searchExpression); 
+ 
                 //If there is no record for actual date in SessionsTable we need to create a new one
                 if (foundrows.Length == 0)
                 {
@@ -1433,21 +1440,24 @@ namespace System_Monitor
 
                     SMuserDB_Connection.UpdateDatabase(QueryResult);
 
-                    MessageBox.Show("OK:" + QueryResult.Tables[0].Rows[1].ToString()); //sprawdzenie czy program wszedł do pętli
+                    MessageBox.Show("OK: New record"); //sprawdzenie czy program wszedł do pętli
+                }   
+                else   //if there already is actual date in SessionsTable we need to take QuantityOfSessions and increment
+                {
+                    System.Data.DataRow row = QueryResult.Tables[0].Select("Date = '" + ActualDate + "'").FirstOrDefault();
+
+                    int NumOfSessions = Int32.Parse(row["QuantityOfSessions"].ToString());
+                    NumOfSessions++;
+
+                    row["QuantityOfSessions"] = NumOfSessions;
+                    SMuserDB_Connection.UpdateDatabase(QueryResult);
+
+                    MessageBox.Show("OK: Edited existing record" + NumOfSessions.ToString()); //sprawdzenie czy program wszedł do pętli
                 }               
-
-                //System.Data.DataRow DRow = QueryResult.Tables[0].Rows[0];
-                //MessageBox.Show("OK:" + foundrows.ToString());
-                //int test = Int32.Parse(DRow.ItemArray.GetValue(1).ToString());
-
-                //if (test == 0)
-                //{
-                //    MessageBox.Show("OK");
-                //}
             }
             catch (Exception err)
             {
-                MessageBox.Show("ERROR: " + err.Message);
+                MessageBox.Show("Error during editing SMuserDB at startup: " + err.Message);
             }
         }
 
