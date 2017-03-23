@@ -28,7 +28,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.31";   //Release number
+        public string release = " 0.0.32";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -1169,6 +1169,56 @@ namespace System_Monitor
             TimeOfSessionInt++; //evere one minute var TimeOfSession is incrementing
             ShowActualSessionTime();   //Showing actual session time
             
+            //
+            //Every timer tick we also need to update SMUserDB SessionsTable record for actual date
+            //
+
+            //Database SMuserDB connection startup
+            try
+            {
+                // Try for startup connection with SMuserDB
+
+                SMuserDB_Connection = new DatabaseConnection();
+                conString = Properties.Settings.Default.SMuserDBConnectionString;
+
+                SMuserDB_Connection.connection_string = conString;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error during SMuserDB startup: " + err.Message);
+            }
+
+            //Updating TimeOfAllSessions row in SessionsTable
+
+            try
+            {
+                string ActualDate = DateTime.Today.ToString();
+                System.Data.DataSet QueryResult;
+
+                //Take all records from SessionsTable
+                SMuserDB_Connection.Sql_Query = "SELECT * from SessionsTable";
+
+                QueryResult = SMuserDB_Connection.GetConnection;   //Assign all this records to QueryResult
+                string searchExpression = "Date = '" + ActualDate + "'";   //search query for actual date
+
+                //Searching for actual date in SessionsTable
+                System.Data.DataRow[] foundrows = QueryResult.Tables[0].Select(searchExpression);
+
+                System.Data.DataRow row = QueryResult.Tables[0].Select("Date = '" + ActualDate + "'").FirstOrDefault();
+
+                int TimeOfSessionsDB = Int32.Parse(row["TimeOfAllSessions"].ToString());
+                TimeOfSessionsDB++;
+
+                row["TimeOfAllSessions"] = TimeOfSessionsDB;
+                SMuserDB_Connection.UpdateDatabase(QueryResult);
+
+                MessageBox.Show("OK: Edited existing record time of sessions" + TimeOfSessionsDB.ToString()); //sprawdzenie czy program wszedł do pętli
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error during editing SMuserDB at timer tick 1 min: " + err.Message);
+            }
+
         }
 
         //
@@ -1452,7 +1502,7 @@ namespace System_Monitor
                     row["QuantityOfSessions"] = NumOfSessions;
                     SMuserDB_Connection.UpdateDatabase(QueryResult);
 
-                    MessageBox.Show("OK: Edited existing record" + NumOfSessions.ToString()); //sprawdzenie czy program wszedł do pętli
+                    MessageBox.Show("OK: Edited existing record number of sessions " + NumOfSessions.ToString()); //sprawdzenie czy program wszedł do pętli
                 }               
             }
             catch (Exception err)

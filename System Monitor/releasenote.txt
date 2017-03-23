@@ -1,3 +1,7 @@
+------Version 0.0.32--------
+
+- Upgrading TimeOfAllSessions record in SMuserDB SessionsTable on timer tick 1 min
+
 ------Version 0.0.31--------
 
 - At startup program is checking if record for actual date exist and increment QuantityOfSessions in SessionsTable if exist
