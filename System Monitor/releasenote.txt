@@ -1,6 +1,10 @@
+------Version 0.0.33--------
+
+- Added cleaning SessionsTable in SMUserDB from records older than 30 days to keep DB small
+
 ------Version 0.0.32--------
 
-- Upgrading TimeOfAllSessions record in SMuserDB SessionsTable on timer tick 1 min
+- Updating TimeOfAllSessions record in SMuserDB SessionsTable on timer tick 1 min
 
 ------Version 0.0.31--------
 

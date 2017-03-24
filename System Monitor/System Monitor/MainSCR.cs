@@ -17,6 +17,7 @@ using System.Management;
 using System.Net.NetworkInformation;
 using Microsoft.Win32;
 using NativeWifi;
+using System.Data.SqlClient;
 
 namespace System_Monitor
 {
@@ -28,7 +29,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.32";   //Release number
+        public string release = " 0.0.33";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -1212,7 +1213,7 @@ namespace System_Monitor
                 row["TimeOfAllSessions"] = TimeOfSessionsDB;
                 SMuserDB_Connection.UpdateDatabase(QueryResult);
 
-                MessageBox.Show("OK: Edited existing record time of sessions" + TimeOfSessionsDB.ToString()); //sprawdzenie czy program wszedł do pętli
+                MessageBox.Show("OK: Edited existing record time of sessions" + TimeOfSessionsDB.ToString()); //only for test/debug purpose, not used in app for user
             }
             catch (Exception err)
             {
@@ -1444,7 +1445,9 @@ namespace System_Monitor
             //And applying it to ProcessorNameLabel
             this.ProcessorNameLabel.Text = res_man.GetString("ProcessorNameLabel", language) + ProcessorName;  //must be done during loading to see it after startup
 
-            //Database SMuserDB connection startup
+            //
+            //----Database SMuserDB connection startup
+            //
             try
             {
                 // Try for startup connection with SMuserDB
@@ -1490,7 +1493,7 @@ namespace System_Monitor
 
                     SMuserDB_Connection.UpdateDatabase(QueryResult);
 
-                    MessageBox.Show("OK: New record"); //sprawdzenie czy program wszedł do pętli
+                    MessageBox.Show("OK: New record"); //only for test/debug purpose, not used in app for user
                 }   
                 else   //if there already is actual date in SessionsTable we need to take QuantityOfSessions and increment
                 {
@@ -1502,12 +1505,37 @@ namespace System_Monitor
                     row["QuantityOfSessions"] = NumOfSessions;
                     SMuserDB_Connection.UpdateDatabase(QueryResult);
 
-                    MessageBox.Show("OK: Edited existing record number of sessions " + NumOfSessions.ToString()); //sprawdzenie czy program wszedł do pętli
+                    MessageBox.Show("OK: Edited existing record number of sessions " + NumOfSessions.ToString()); //only for test/debug purpose, not used in app for user
                 }               
             }
             catch (Exception err)
             {
                 MessageBox.Show("Error during editing SMuserDB at startup: " + err.Message);
+            }
+
+
+            //
+            //----Cleaning of Database on startup
+            //
+            try
+            {
+                //
+                //Also on app startup we need to clean database SMuserDB from records older than 30 days to keep DB small
+                //
+
+                string ActualDate = DateTime.Today.ToString();
+                string Date30DaysAgo = DateTime.Today.AddDays(-30).ToString();
+                
+                SqlConnection con = new SqlConnection(conString);
+                SqlCommand cmd = new SqlCommand("DELETE  from [SessionsTable] where [Date] < '" + Date30DaysAgo + "'", con);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error during cleaning SMuserDB at startup: " + err.Message);
             }
         }
 
