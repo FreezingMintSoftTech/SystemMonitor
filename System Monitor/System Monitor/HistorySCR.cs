@@ -27,6 +27,10 @@ namespace System_Monitor
         ResourceManager res_man = new ResourceManager("System_Monitor.Data.lang", typeof(MainSCR).Assembly);    // declare Resource manager to access to specific cultureinfo
         CultureInfo language = CultureInfo.CreateSpecificCulture("en");       // declare culture info, this var is for choosing specyfic language
 
+        //Database SMuserDB variables
+        DatabaseConnection SMuserDB_Connection;
+        string conString;
+
         #endregion
 
         #region FormAppearance&MainProgram
@@ -35,6 +39,9 @@ namespace System_Monitor
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button SessionsHistoryButton;
         private System.Windows.Forms.Label HistorySCRTitle;
+        private System.Windows.Forms.Label DateTitle;
+        private System.Windows.Forms.Label TimeOfAllSessionTitle;
+        private System.Windows.Forms.Label QuantityOfSessionsTitle;
         //----End of defining objects on this form
 
 
@@ -57,7 +64,7 @@ namespace System_Monitor
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "HistorySCR";
             this.Text = "HistorySCR";
-            this.Height = 230;
+            this.Height = 500;
             this.Width = 500;
             this.ShowInTaskbar = false;
             this.BackColor = Color.FromArgb(255, 255, 255);
@@ -71,7 +78,7 @@ namespace System_Monitor
             //  
             this.CloseButton = new System.Windows.Forms.Button();
             this.CloseButton.Visible = true;
-            this.CloseButton.Location = new System.Drawing.Point(427, 200);
+            this.CloseButton.Location = new System.Drawing.Point(427, 470);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(70, 20);
             this.CloseButton.Text = res_man.GetString("CloseButton", language);
@@ -85,7 +92,7 @@ namespace System_Monitor
             //  
             this.SessionsHistoryButton = new System.Windows.Forms.Button();
             this.SessionsHistoryButton.Visible = true;
-            this.SessionsHistoryButton.Location = new System.Drawing.Point(427, 10);
+            this.SessionsHistoryButton.Location = new System.Drawing.Point(427, 50);
             this.SessionsHistoryButton.Name = "SessionsHistoryButton";
             this.SessionsHistoryButton.Size = new System.Drawing.Size(70, 40);
             this.SessionsHistoryButton.Text = res_man.GetString("SessionsHistoryButton", language);
@@ -103,12 +110,50 @@ namespace System_Monitor
             this.HistorySCRTitle.TabIndex = 1;
             this.HistorySCRTitle.Size = new System.Drawing.Size(200, 20);
             this.HistorySCRTitle.Text = res_man.GetString("HistorySCRTitle", language);
-            this.HistorySCRTitle.TextAlign = System.Drawing.ContentAlignment.TopLeft; 
+            this.HistorySCRTitle.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+
+            // 
+            // Label DateTitle
+            //
+            this.DateTitle = new System.Windows.Forms.Label();
+            this.DateTitle.Location = new System.Drawing.Point(30, 40);
+            this.DateTitle.Name = "DateTitle";
+            this.DateTitle.TabIndex = 1;
+            this.DateTitle.Size = new System.Drawing.Size(50, 20);
+            this.DateTitle.Text = res_man.GetString("DateTitle", language);
+            this.DateTitle.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.DateTitle.Font = new Font(new FontFamily(System.Drawing.Text.GenericFontFamilies.SansSerif), 7);
+            //this.DateTitle.Font.Bold = true;
+            this.DateTitle.Visible = false;
+
+            // 
+            // Label TimeOfAllSessionTitle
+            //
+            this.TimeOfAllSessionTitle = new System.Windows.Forms.Label();
+            this.TimeOfAllSessionTitle.Location = new System.Drawing.Point(90, 40);
+            this.TimeOfAllSessionTitle.Name = "TimeOfAllSessionTitle";
+            this.TimeOfAllSessionTitle.TabIndex = 1;
+            this.TimeOfAllSessionTitle.Size = new System.Drawing.Size(150, 20);
+            this.TimeOfAllSessionTitle.Text = res_man.GetString("TimeOfAllSessionTitle", language);
+            this.TimeOfAllSessionTitle.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.TimeOfAllSessionTitle.Visible = false;
+
+            // 
+            // Label QuantityOfSessionsTitle
+            //
+            this.QuantityOfSessionsTitle = new System.Windows.Forms.Label();
+            this.QuantityOfSessionsTitle.Location = new System.Drawing.Point(250, 40);
+            this.QuantityOfSessionsTitle.Name = "QuantityOfSessionsTitle";
+            this.QuantityOfSessionsTitle.TabIndex = 1;
+            this.QuantityOfSessionsTitle.Size = new System.Drawing.Size(160, 20);
+            this.QuantityOfSessionsTitle.Text = res_man.GetString("QuantityOfSessionsTitle", language);
+            this.QuantityOfSessionsTitle.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.QuantityOfSessionsTitle.Visible = false;
 
             // 
             // Adding objects to Controls
             //  
-            this.Controls.AddRange(new Control[] { CloseButton, HistorySCRTitle, SessionsHistoryButton });
+            this.Controls.AddRange(new Control[] { CloseButton, HistorySCRTitle, SessionsHistoryButton, DateTitle, TimeOfAllSessionTitle, QuantityOfSessionsTitle });
         }
 
         #endregion
@@ -132,7 +177,79 @@ namespace System_Monitor
         //
         void SessionsHistoryButton_Click(object sender, EventArgs e)   //SessionsHistoryButton Click Event
         {
-            Close();
+            //
+            //----Database SMuserDB connection startup
+            //
+            try
+            {
+                // Try for startup connection with SMuserDB
+
+                SMuserDB_Connection = new DatabaseConnection();
+                conString = Properties.Settings.Default.SMuserDBConnectionString;
+
+                SMuserDB_Connection.connection_string = conString;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error during SMuserDB startup at HistorySCR: " + err.Message);
+            }
+
+            //making title labels visible
+            this.DateTitle.Visible = true;
+            this.TimeOfAllSessionTitle.Visible = true;
+            this.QuantityOfSessionsTitle.Visible = true;
+
+            //
+            //----
+            //
+            try
+            {
+                System.Data.DataSet QueryResult;  
+
+                //at first we create label arrays for each record in SMuserDB 
+                Label[] DateLabel = new Label[30];
+                Label[] TimeOfAllSessionsLabel = new Label[30];
+                Label[] QuantityOfSessionsLabel = new Label[30];
+
+                //Take all records from SessionsTable order descending by Date
+                SMuserDB_Connection.Sql_Query = "SELECT * FROM SessionsTable ORDER BY Date DESC";
+
+                QueryResult = SMuserDB_Connection.GetConnection;   //Assign all this records to QueryResult
+
+                //In for loop we are assigning each record from QueryResult to coresponding labels
+                for (int i = 0; i < QueryResult.Tables[0].Rows.Count; i++)
+                {
+                    System.Data.DataRow row = QueryResult.Tables[0].Rows[i];
+
+                    DateLabel[i] = new Label();
+                    DateLabel[i].Location = new System.Drawing.Point(10, 60 + i*20);
+                    DateLabel[i].Name = "DateLabel" + i.ToString();
+                    DateLabel[i].Text = row["Date"].ToString();
+
+                    TimeOfAllSessionsLabel[i] = new Label();
+                    TimeOfAllSessionsLabel[i].Location = new System.Drawing.Point(110, 60 + i * 20);
+                    TimeOfAllSessionsLabel[i].Name = "TimeOfAllSessionsLabel" + i.ToString();
+                    TimeOfAllSessionsLabel[i].Text = row["TimeOfAllSessions"].ToString();
+
+                    QuantityOfSessionsLabel[i] = new Label();
+                    QuantityOfSessionsLabel[i].Location = new System.Drawing.Point(250, 60 + i * 20);
+                    QuantityOfSessionsLabel[i].Name = "QuantityOfSessionsLabel" + i.ToString();
+                    QuantityOfSessionsLabel[i].Text = row["QuantityOfSessions"].ToString();
+
+
+                    //adding all new labels to controls
+                    this.Controls.Add(DateLabel[i]);
+                    this.Controls.Add(TimeOfAllSessionsLabel[i]);
+                    this.Controls.Add(QuantityOfSessionsLabel[i]);
+
+                }
+
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error during generating history list from SMuserDB: " + err.Message);
+            }
         }
 
         #endregion
@@ -182,7 +299,7 @@ namespace System_Monitor
             {
                 Rectangle rect = ClientRectangle;
                 rect.Location = new Point(1, 1);                  // specify rectangle relative position here (always 1, 1)
-                rect.Size = new Size(498, 228);                  // specify rectangle size here (size of form -2, -2)
+                rect.Size = new Size(498, 498);                  // specify rectangle size here (size of form -2, -2)
 
                 using (Pen pen = new Pen(Color.Black, 2))    // specify color here and pen type here
                 {

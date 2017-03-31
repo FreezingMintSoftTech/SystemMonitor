@@ -219,4 +219,13 @@
   <data name="SessionsHistoryButton" xml:space="preserve">
     <value>Historia Sesji</value>
   </data>
+  <data name="DateTitle" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="QuantityOfSessionsTitle" xml:space="preserve">
+    <value>Ilość wszystkich sesji</value>
+  </data>
+  <data name="TimeOfAllSessionTitle" xml:space="preserve">
+    <value>Suma wszystkich sesji</value>
+  </data>
 </root>

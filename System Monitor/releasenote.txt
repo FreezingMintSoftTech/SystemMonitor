@@ -1,3 +1,11 @@
+------Version 0.0.34--------
+
+- Changed size of HistorySCR to match MainSCR
+- Added DateTitle Label on HistorySCR
+- Added TimeOfAllSessionTitle Label on HistorySCR
+- Added QuantityOfSessionsTitle Label on HistorySCR
+- Applied funcionality to SessionsHistoryButton: App is connecting to SMuserDB, reading all records from last 30 days, creating new labels dynamically with Date, TimeOfAllSessions and QuantityOfAllSessions
+
 ------Version 0.0.33--------
 
 - Added cleaning SessionsTable in SMUserDB from records older than 30 days to keep DB small

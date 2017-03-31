@@ -29,7 +29,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.33";   //Release number
+        public string release = " 0.0.34";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
