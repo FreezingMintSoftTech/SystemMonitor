@@ -156,7 +156,7 @@ namespace System_Monitor
             this.Controls.AddRange(new Control[] { CloseButton, HistorySCRTitle, SessionsHistoryButton, DateTitle, TimeOfAllSessionTitle, QuantityOfSessionsTitle });
         }
 
-        #endregion
+        #endregion              
 
         #region ProgramEvents
 
@@ -215,21 +215,35 @@ namespace System_Monitor
                 SMuserDB_Connection.Sql_Query = "SELECT * FROM SessionsTable ORDER BY Date DESC";
 
                 QueryResult = SMuserDB_Connection.GetConnection;   //Assign all this records to QueryResult
+                int TimeOfSessionsInt = 0;   //Var used for showing Time of sessions as Hours and Minutes
 
                 //In for loop we are assigning each record from QueryResult to coresponding labels
                 for (int i = 0; i < QueryResult.Tables[0].Rows.Count; i++)
                 {
                     System.Data.DataRow row = QueryResult.Tables[0].Rows[i];
 
+                    TimeOfSessionsInt = Int32.Parse(row["TimeOfAllSessions"].ToString());
+                    int hours = 0;
+                    int minutes = 0;
+
                     DateLabel[i] = new Label();
                     DateLabel[i].Location = new System.Drawing.Point(10, 60 + i*20);
                     DateLabel[i].Name = "DateLabel" + i.ToString();
                     DateLabel[i].Text = row["Date"].ToString();
-
+                    
                     TimeOfAllSessionsLabel[i] = new Label();
-                    TimeOfAllSessionsLabel[i].Location = new System.Drawing.Point(110, 60 + i * 20);
+                    TimeOfAllSessionsLabel[i].Location = new System.Drawing.Point(120, 60 + i * 20);
                     TimeOfAllSessionsLabel[i].Name = "TimeOfAllSessionsLabel" + i.ToString();
-                    TimeOfAllSessionsLabel[i].Text = row["TimeOfAllSessions"].ToString();
+                    if (TimeOfSessionsInt < 60)
+                    {
+                        TimeOfAllSessionsLabel[i].Text = TimeOfSessionsInt.ToString() + " " + res_man.GetString("Minutes", language);
+                    }
+                    else
+                    {
+                        hours = TimeOfSessionsInt / 60;
+                        minutes = TimeOfSessionsInt - (hours * 60);
+                        TimeOfAllSessionsLabel[i].Text = hours.ToString() + " " + res_man.GetString("Hours", language) + " " + minutes.ToString() + " " + res_man.GetString("Minutes", language);
+                    }
 
                     QuantityOfSessionsLabel[i] = new Label();
                     QuantityOfSessionsLabel[i].Location = new System.Drawing.Point(250, 60 + i * 20);

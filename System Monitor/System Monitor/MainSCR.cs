@@ -29,7 +29,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.34";   //Release number
+        public string release = " 0.0.35";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -1213,7 +1213,7 @@ namespace System_Monitor
                 row["TimeOfAllSessions"] = TimeOfSessionsDB;
                 SMuserDB_Connection.UpdateDatabase(QueryResult);
 
-                MessageBox.Show("OK: Edited existing record time of sessions" + TimeOfSessionsDB.ToString()); //only for test/debug purpose, not used in app for user
+                //MessageBox.Show("OK: Edited existing record time of sessions" + TimeOfSessionsDB.ToString()); //only for test/debug purpose, not used in app for user
             }
             catch (Exception err)
             {
@@ -1493,7 +1493,7 @@ namespace System_Monitor
 
                     SMuserDB_Connection.UpdateDatabase(QueryResult);
 
-                    MessageBox.Show("OK: New record"); //only for test/debug purpose, not used in app for user
+                    //MessageBox.Show("OK: New record"); //only for test/debug purpose, not used in app for user
                 }   
                 else   //if there already is actual date in SessionsTable we need to take QuantityOfSessions and increment
                 {
@@ -1505,7 +1505,7 @@ namespace System_Monitor
                     row["QuantityOfSessions"] = NumOfSessions;
                     SMuserDB_Connection.UpdateDatabase(QueryResult);
 
-                    MessageBox.Show("OK: Edited existing record number of sessions " + NumOfSessions.ToString()); //only for test/debug purpose, not used in app for user
+                    //MessageBox.Show("OK: Edited existing record number of sessions " + NumOfSessions.ToString()); //only for test/debug purpose, not used in app for user
                 }               
             }
             catch (Exception err)
