@@ -200,6 +200,22 @@ namespace System_Monitor
             this.QuantityOfSessionsTitle.Visible = true;
 
             //
+            //clearing of all old labels with TAG dispose to draw new ones on click
+            //
+            try
+            {
+                foreach (Label label in Controls.OfType<Label>())
+                {
+                    if (label.Tag != null && label.Tag.ToString() == "dispose")
+                        label.Dispose();
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error during clearing old labels on HistorySCR: " + err.Message);
+            }
+
+            //
             //----
             //
             try
@@ -219,7 +235,7 @@ namespace System_Monitor
 
                 //In for loop we are assigning each record from QueryResult to coresponding labels
                 for (int i = 0; i < QueryResult.Tables[0].Rows.Count; i++)
-                {
+                {                    
                     System.Data.DataRow row = QueryResult.Tables[0].Rows[i];
 
                     TimeOfSessionsInt = Int32.Parse(row["TimeOfAllSessions"].ToString());
@@ -229,11 +245,13 @@ namespace System_Monitor
                     DateLabel[i] = new Label();
                     DateLabel[i].Location = new System.Drawing.Point(10, 60 + i*20);
                     DateLabel[i].Name = "DateLabel" + i.ToString();
+                    DateLabel[i].Tag = "dispose";
                     DateLabel[i].Text = row["Date"].ToString();
                     
                     TimeOfAllSessionsLabel[i] = new Label();
                     TimeOfAllSessionsLabel[i].Location = new System.Drawing.Point(120, 60 + i * 20);
                     TimeOfAllSessionsLabel[i].Name = "TimeOfAllSessionsLabel" + i.ToString();
+                    TimeOfAllSessionsLabel[i].Tag = "dispose";
                     if (TimeOfSessionsInt < 60)
                     {
                         TimeOfAllSessionsLabel[i].Text = TimeOfSessionsInt.ToString() + " " + res_man.GetString("Minutes", language);
@@ -248,6 +266,7 @@ namespace System_Monitor
                     QuantityOfSessionsLabel[i] = new Label();
                     QuantityOfSessionsLabel[i].Location = new System.Drawing.Point(250, 60 + i * 20);
                     QuantityOfSessionsLabel[i].Name = "QuantityOfSessionsLabel" + i.ToString();
+                    QuantityOfSessionsLabel[i].Tag = "dispose";
                     QuantityOfSessionsLabel[i].Text = row["QuantityOfSessions"].ToString();
 
 

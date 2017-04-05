@@ -1,3 +1,7 @@
+------Version 0.0.36--------
+
+- added funcinality to clear all old dynamically created labels with tag dispose to on click event for SessionsHistoryButton on HistorySCR
+
 ------Version 0.0.35--------
 
 - Added funcionality to show TimeOfSessions as hours and minutes format
