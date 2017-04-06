@@ -1,3 +1,13 @@
+------Version 0.0.37--------
+
+- improved funcinality to clear all old dynamically created labels with tag dispose to on click event for SessionsHistoryButton on HistorySCR (had one bug)
+- added funcinality to clear all old dynamically created labels with tag dispose to on click event for TimeOfSessions label on HistorySCR
+- added funcionality to switch sorting to TimeOfAllSessions after clicking label TimeOfAllSessions
+- added funcinality to clear all old dynamically created labels with tag dispose to on click event for QuantityOfSessions label on HistorySCR
+- added funcionality to switch sorting to QuantityOfSessions after clicking label QuantityOfSessions
+- added funcinality to clear all old dynamically created labels with tag dispose to on click event for DateTitle label on HistorySCR
+- added funcionality to switch sorting to Date after clicking label DateTitle
+
 ------Version 0.0.36--------
 
 - added funcinality to clear all old dynamically created labels with tag dispose to on click event for SessionsHistoryButton on HistorySCR
