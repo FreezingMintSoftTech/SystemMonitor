@@ -228,4 +228,7 @@
   <data name="TimeOfAllSessionTitle" xml:space="preserve">
     <value>Sum of all sessions</value>
   </data>
+  <data name="ChangeSortingClick" xml:space="preserve">
+    <value>Click to change sorting</value>
+  </data>
 </root>

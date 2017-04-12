@@ -45,6 +45,7 @@ namespace System_Monitor
         private System.Windows.Forms.Label DateTitle;
         private System.Windows.Forms.Label TimeOfAllSessionTitle;
         private System.Windows.Forms.Label QuantityOfSessionsTitle;
+        private System.Windows.Forms.ToolTip SortingToolTip;
         //----End of defining objects on this form
 
 
@@ -153,6 +154,18 @@ namespace System_Monitor
             this.QuantityOfSessionsTitle.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.QuantityOfSessionsTitle.Visible = false;
             this.QuantityOfSessionsTitle.Click += QuantityOfSessionsTitle_Click;
+
+            //
+            // ToolTip SortingToolTip
+            //
+            SortingToolTip = new ToolTip();
+            SortingToolTip.ToolTipIcon = ToolTipIcon.Info;
+            //SortingToolTip.IsBalloon = true;
+            SortingToolTip.ShowAlways = true;
+
+            SortingToolTip.SetToolTip(DateTitle, res_man.GetString("ChangeSortingClick", language));
+            SortingToolTip.SetToolTip(TimeOfAllSessionTitle, res_man.GetString("ChangeSortingClick", language));
+            SortingToolTip.SetToolTip(QuantityOfSessionsTitle, res_man.GetString("ChangeSortingClick", language));
 
             // 
             // Adding objects to Controls

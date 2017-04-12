@@ -1,3 +1,7 @@
+------Version 0.0.38--------
+
+- Added SortingToolTip to DateTitle, TimeOfAllSessionsTitle and QuantityOfSessionstitle
+
 ------Version 0.0.37--------
 
 - improved funcinality to clear all old dynamically created labels with tag dispose to on click event for SessionsHistoryButton on HistorySCR (had one bug)
