@@ -29,7 +29,7 @@ namespace System_Monitor
         //----Program VARiables declaration----
         //
         //Release Variable
-        public string release = " 0.0.39";   //Release number
+        public string release = " 0.0.40";   //Release number
         public string YearOfRelease = "2017";   //Release year
 
         //Program Variables
@@ -806,6 +806,7 @@ namespace System_Monitor
         //Click on TrayIcon event
         private void TrayIcon_Click(object sender, EventArgs e)
         {
+            //MainSCR
             if (this.WindowState == FormWindowState.Minimized) //If MainSCR is minimized then show it and change window state to normal
             {
                 this.Show();
@@ -814,7 +815,7 @@ namespace System_Monitor
             else   //if window state is not minimized then bring app to front
             {
                 this.Activate();
-            }                      
+            }                   
         }
 
         private void CloseProgram_Click(object sender, EventArgs e)
@@ -1158,7 +1159,7 @@ namespace System_Monitor
         void HistoryButton_Click(object sender, EventArgs e)   //HistoryButton Click Event
         {
             HistorySCR frm = new HistorySCR(language, MainSCRLocationX, MainSCRLocationY, this.Width);
-            frm.Show();
+            frm.Show(this);   //parameter 'this' is passed from MainSCR to HistorySCR so MainSCR is owner of HistorySCR
         }
 
         //
@@ -1205,15 +1206,34 @@ namespace System_Monitor
                 //Searching for actual date in SessionsTable
                 System.Data.DataRow[] foundrows = QueryResult.Tables[0].Select(searchExpression);
 
-                System.Data.DataRow row = QueryResult.Tables[0].Select("Date = '" + ActualDate + "'").FirstOrDefault();
+                //-----------changes from 0.0.40 - tested
+                //If there is no record for actual date in SessionsTable we need to create a new one
+                if (foundrows.Length == 0)
+                {
+                    //Preparing new row for the database
+                    System.Data.DataRow NewRow = QueryResult.Tables[0].NewRow();
+                    NewRow[1] = ActualDate.ToString();
+                    NewRow[2] = 0;
+                    NewRow[3] = 1;
+                    QueryResult.Tables[0].Rows.Add(NewRow);
 
-                int TimeOfSessionsDB = Int32.Parse(row["TimeOfAllSessions"].ToString());
-                TimeOfSessionsDB++;
+                    SMuserDB_Connection.UpdateDatabase(QueryResult);
 
-                row["TimeOfAllSessions"] = TimeOfSessionsDB;
-                SMuserDB_Connection.UpdateDatabase(QueryResult);
+                    //MessageBox.Show("OK: New record"); //only for test/debug purpose, not used in app for user
+                }
+                //-----------changes from 0.0.40 - tested
+                else
+                {
+                    System.Data.DataRow row = QueryResult.Tables[0].Select("Date = '" + ActualDate + "'").FirstOrDefault();
 
-                //MessageBox.Show("OK: Edited existing record time of sessions" + TimeOfSessionsDB.ToString()); //only for test/debug purpose, not used in app for user
+                    int TimeOfSessionsDB = Int32.Parse(row["TimeOfAllSessions"].ToString());
+                    TimeOfSessionsDB++;
+
+                    row["TimeOfAllSessions"] = TimeOfSessionsDB;
+                    SMuserDB_Connection.UpdateDatabase(QueryResult);
+
+                    //MessageBox.Show("OK: Edited existing record time of sessions" + TimeOfSessionsDB.ToString()); //only for test/debug purpose, not used in app for user
+                }
             }
             catch (Exception err)
             {
