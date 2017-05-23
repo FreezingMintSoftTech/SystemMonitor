@@ -1,3 +1,8 @@
+------Version 0.0.39--------
+
+- added SumOfAllSessionsTimesLabel and apply funcionality to sum all values for column TimeOfAllSessions for each row in SessionsTable and display this value after clicking on SessionsHistory Button
+- added SumOfAllSessionsQuantityLabel and apply funcionality to sum all values for column QuantityOfSessions for each row in SessionsTable and display this value after clicking on SessionsHistory Button
+
 ------Version 0.0.38--------
 
 - Added SortingToolTip to DateTitle, TimeOfAllSessionsTitle and QuantityOfSessionstitle

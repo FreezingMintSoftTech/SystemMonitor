@@ -231,4 +231,10 @@
   <data name="ChangeSortingClick" xml:space="preserve">
     <value>Kliknij aby zmienić sortowanie</value>
   </data>
+  <data name="SumOfAllSessionsQuantityLabel" xml:space="preserve">
+    <value>Suma ilości wszystkich sesji z ostatnich 30 dni:</value>
+  </data>
+  <data name="SumOfAllSessionsTimesLabel" xml:space="preserve">
+    <value>Suma czasu wszystkich sesji z ostatnich 30 dni:</value>
+  </data>
 </root>

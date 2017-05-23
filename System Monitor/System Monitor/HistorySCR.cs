@@ -45,6 +45,8 @@ namespace System_Monitor
         private System.Windows.Forms.Label DateTitle;
         private System.Windows.Forms.Label TimeOfAllSessionTitle;
         private System.Windows.Forms.Label QuantityOfSessionsTitle;
+        private System.Windows.Forms.Label SumOfAllSessionsTimesLabel;
+        private System.Windows.Forms.Label SumOfAllSessionsQuantityLabel;
         private System.Windows.Forms.ToolTip SortingToolTip;
         //----End of defining objects on this form
 
@@ -155,6 +157,30 @@ namespace System_Monitor
             this.QuantityOfSessionsTitle.Visible = false;
             this.QuantityOfSessionsTitle.Click += QuantityOfSessionsTitle_Click;
 
+            // 
+            // Label SumOfAllSessionsTimesLabel
+            //
+            this.SumOfAllSessionsTimesLabel = new System.Windows.Forms.Label();
+            this.SumOfAllSessionsTimesLabel.Location = new System.Drawing.Point(10, 450);
+            this.SumOfAllSessionsTimesLabel.Name = "SumOfAllSessionsTimesLabel";
+            this.SumOfAllSessionsTimesLabel.TabIndex = 1;
+            this.SumOfAllSessionsTimesLabel.Size = new System.Drawing.Size(400, 20);
+            this.SumOfAllSessionsTimesLabel.Text = res_man.GetString("SumOfAllSessionsTimesLabel", language);
+            this.SumOfAllSessionsTimesLabel.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.SumOfAllSessionsTimesLabel.Visible = false;
+
+            // 
+            // Label SumOfAllSessionsQuantityLabel
+            //
+            this.SumOfAllSessionsQuantityLabel = new System.Windows.Forms.Label();
+            this.SumOfAllSessionsQuantityLabel.Location = new System.Drawing.Point(10, 470);
+            this.SumOfAllSessionsQuantityLabel.Name = "SumOfAllSessionsQuantityLabel";
+            this.SumOfAllSessionsQuantityLabel.TabIndex = 1;
+            this.SumOfAllSessionsQuantityLabel.Size = new System.Drawing.Size(400, 20);
+            this.SumOfAllSessionsQuantityLabel.Text = res_man.GetString("SumOfAllSessionsQuantityLabel", language);
+            this.SumOfAllSessionsQuantityLabel.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.SumOfAllSessionsQuantityLabel.Visible = false;
+
             //
             // ToolTip SortingToolTip
             //
@@ -170,7 +196,7 @@ namespace System_Monitor
             // 
             // Adding objects to Controls
             //  
-            this.Controls.AddRange(new Control[] { CloseButton, HistorySCRTitle, SessionsHistoryButton, DateTitle, TimeOfAllSessionTitle, QuantityOfSessionsTitle });
+            this.Controls.AddRange(new Control[] { CloseButton, HistorySCRTitle, SessionsHistoryButton, DateTitle, TimeOfAllSessionTitle, QuantityOfSessionsTitle, SumOfAllSessionsTimesLabel, SumOfAllSessionsQuantityLabel });
         }
 
         #endregion              
@@ -309,8 +335,81 @@ namespace System_Monitor
             {
                 MessageBox.Show("Error during generating history list from SMuserDB: " + err.Message);
             }
-        }
 
+            //
+            //----Summing times of all sessions from last 30 days
+            //
+            try
+            {
+                System.Data.DataSet QueryResult;
+                int SumOfAllSessionsTimesValue = 0;   //Var used for showing sum of Time of sessions in minutes
+                int hours = 0;
+                int minutes = 0;
+
+                //Take all records from SessionsTable
+                SMuserDB_Connection.Sql_Query = "SELECT * from SessionsTable";
+
+                QueryResult = SMuserDB_Connection.GetConnection;   //Assign all this records to QueryResult
+
+                //in for loop we are taking value from column TimeOfAllSessions for each row and increment SumOfAllSessionsTimesValue
+                for (int i = 0; i < QueryResult.Tables[0].Rows.Count; i++)
+                {
+                    System.Data.DataRow row = QueryResult.Tables[0].Rows[i];
+
+                    SumOfAllSessionsTimesValue = SumOfAllSessionsTimesValue + Int32.Parse(row["TimeOfAllSessions"].ToString());
+                }
+
+                //next step is to check minutes and hours to display it proper
+                if (SumOfAllSessionsTimesValue < 60)
+                {
+                    SumOfAllSessionsTimesLabel.Text = res_man.GetString("SumOfAllSessionsTimesLabel", language) + ' ' + SumOfAllSessionsTimesValue.ToString() + " " + res_man.GetString("Minutes", language);
+                }
+                else
+                {
+                    hours = SumOfAllSessionsTimesValue / 60;
+                    minutes = SumOfAllSessionsTimesValue - (hours * 60);
+                    SumOfAllSessionsTimesLabel.Text = res_man.GetString("SumOfAllSessionsTimesLabel", language) + ' ' + hours.ToString() + " "  + res_man.GetString("Hours", language) + " " + minutes.ToString() + " " + res_man.GetString("Minutes", language);
+                }
+                               
+                SumOfAllSessionsTimesLabel.Visible = true;   //setting SumOfAllSessionsTimesLabel visible
+
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error during summing times of all sessions from SMuserDB: " + err.Message);
+            }
+
+            //
+            //----Summing quantity of all sessions from last 30 days
+            //
+            try
+            {
+                System.Data.DataSet QueryResult;
+                int SumOfAllSessionsQuantityValue = 0;
+
+                //Take all records from SessionsTable
+                SMuserDB_Connection.Sql_Query = "SELECT * from SessionsTable";
+
+                QueryResult = SMuserDB_Connection.GetConnection;   //Assign all this records to QueryResult
+
+                //in for loop we are taking value from column TimeOfAllSessions for each row and increment SumOfAllSessionsTimesValue
+                for (int i = 0; i < QueryResult.Tables[0].Rows.Count; i++)
+                {
+                    System.Data.DataRow row = QueryResult.Tables[0].Rows[i];
+
+                    SumOfAllSessionsQuantityValue = SumOfAllSessionsQuantityValue + Int32.Parse(row["QuantityOfSessions"].ToString());
+                }
+
+                SumOfAllSessionsQuantityLabel.Text = res_man.GetString("SumOfAllSessionsQuantityLabel", language) + " " + SumOfAllSessionsQuantityValue.ToString();
+                SumOfAllSessionsQuantityLabel.Visible = true;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Error during summing quantity of all sessions from SMuserDB: " + err.Message);
+            }
+
+        }
+        
         #endregion
 
         #region TitleLabels_Events
