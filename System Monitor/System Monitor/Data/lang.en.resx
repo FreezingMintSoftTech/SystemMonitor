@@ -237,4 +237,7 @@
   <data name="SumOfAllSessionsTimesLabel" xml:space="preserve">
     <value>Sum of all sessions times from last 30 days:</value>
   </data>
+  <data name="RunAtSystemStartup" xml:space="preserve">
+    <value>Run at system startup</value>
+  </data>
 </root>

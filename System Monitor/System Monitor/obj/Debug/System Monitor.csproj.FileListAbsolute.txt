@@ -46,3 +46,5 @@ D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monit
 D:\Programy Programowanie\Moje\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\UserData\SMuserDB_log.ldf
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\ManagedWifi.dll
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\ManagedWifi.pdb
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\Interop.IWshRuntimeLibrary.dll
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.csproj.ResolveComReference.cache

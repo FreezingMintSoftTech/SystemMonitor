@@ -1,3 +1,8 @@
+------Version 0.0.41--------
+
+- added RunAtSystemStartupCheckBox at SettingSCR
+- applied full funcionality to RunAtSystemStartupCheckBox as it should work (creating shorcut or deleteing it in startup folder)
+
 ------Version 0.0.40--------
 
 - Fixed bug when app was trying to edit non existing record in DB when app was working during date change

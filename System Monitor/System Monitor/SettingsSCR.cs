@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.Resources;
 using System.Drawing;
+using System.IO;
+using IWshRuntimeLibrary;
 
 namespace System_Monitor
 {
@@ -26,6 +28,9 @@ namespace System_Monitor
         //Languages Variables
         ResourceManager res_man = new ResourceManager("System_Monitor.Data.lang", typeof(MainSCR).Assembly);    // declare Resource manager to access to specific cultureinfo
         CultureInfo language = CultureInfo.CreateSpecificCulture("en");       // declare culture info, this var is for choosing specyfic language
+
+        //Patch Variables
+        static string PatchToApp = AppDomain.CurrentDomain.BaseDirectory;  //static var with current path to app
                 
         #endregion
 
@@ -37,6 +42,7 @@ namespace System_Monitor
         private System.Windows.Forms.Label SettingsSCRTitle;
         private System.Windows.Forms.Label LanguageLabel;
         private System.Windows.Forms.ComboBox LanguagesComboBox;
+        private System.Windows.Forms.CheckBox RunAtSystemStartupCheckBox;
         //----End of defining objects on this form
 
         public SettingsSCR(CultureInfo langH, int MainSCRX, int MainSCRY, int MainSCRWidth, int MainSCRHeight)
@@ -142,12 +148,27 @@ namespace System_Monitor
             this.LanguagesComboBox.Size = new System.Drawing.Size(60, 24);
             this.LanguagesComboBox.TabIndex = 3;            
             this.LanguagesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.LanguagesComboBox.DataSource = langs;            
+            this.LanguagesComboBox.DataSource = langs;
+
+            // 
+            // RunAtSystemStartupCheckBox
+            // 
+            this.RunAtSystemStartupCheckBox = new System.Windows.Forms.CheckBox();
+            this.RunAtSystemStartupCheckBox.AutoSize = true;
+            this.RunAtSystemStartupCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.RunAtSystemStartupCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.RunAtSystemStartupCheckBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RunAtSystemStartupCheckBox.Location = new System.Drawing.Point(2, 80);
+            this.RunAtSystemStartupCheckBox.Name = "RunAtSystemStartupCheckBox";
+            this.RunAtSystemStartupCheckBox.Size = new System.Drawing.Size(218, 21);
+            this.RunAtSystemStartupCheckBox.TabIndex = 4;
+            this.RunAtSystemStartupCheckBox.Text = res_man.GetString("RunAtSystemStartup", language);
+            this.RunAtSystemStartupCheckBox.UseVisualStyleBackColor = true;
 
             // 
             // Adding objects to Controls
             //  
-            this.Controls.AddRange(new Control[] { CancelButton, SaveButton, SettingsSCRTitle, LanguageLabel, LanguagesComboBox });
+            this.Controls.AddRange(new Control[] { CancelButton, SaveButton, SettingsSCRTitle, LanguageLabel, LanguagesComboBox, RunAtSystemStartupCheckBox });
         }
 
         #endregion       
@@ -195,8 +216,58 @@ namespace System_Monitor
                 {
                     (System.Windows.Forms.Application.OpenForms["MainSCR"] as MainSCR).LanguagesMenuLangPL_Change();
                 }
-            }     
+            }
 
+            //
+            //----Checking if RunAtSystemStartupCheckbox is checked and apply
+            //
+            string startUpFolder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+            string shortcutPath = startUpFolder + @"\System_Monitor.lnk";
+
+            if (this.RunAtSystemStartupCheckBox.Checked == true) //if checkbox checked
+            {
+                if (System.IO.File.Exists(shortcutPath))  //if file already exists we don't have to create it
+                {
+                    //MessageBox.Show("RunAtSystemStartupCheckBox checked but file already exist");   //only for tests/debug purposes
+                }
+                else   //if file don't exist we need to create a new one
+                {
+                    try
+                    {
+                        WshShell shell = new WshShell();
+                        IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutPath);
+                        shortcut.Description = "System Monitor Shortcut";
+                        shortcut.TargetPath = PatchToApp + @"\System Monitor.exe";
+                        shortcut.WorkingDirectory = PatchToApp;
+                        shortcut.Save();
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show("Error during 'RunAtSystemStartupCheckBox checked, file don't exist - created new file': " + err);
+                    }
+                    //MessageBox.Show("RunAtSystemStartupCheckBox checked, file don't exist - created new file");   //only for tests/debug purposes
+                }
+            }
+            else   //if checkbox not checked
+            {
+                if (System.IO.File.Exists(shortcutPath))   //if file exist we need to delete it
+                {
+                    try
+                    {
+                        System.IO.File.Delete(shortcutPath);
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show("Error during 'RunAtSystemStartupCheckBox NOT checked and file exist - deleted': " + err);
+                    }
+                    //MessageBox.Show("RunAtSystemStartupCheckBox NOT checked and file exist - deleted");   //only for tests/debug purposes
+                }
+                else   //if file don't exist we don't have to delete it
+                {
+                    //MessageBox.Show("RunAtSystemStartupCheckBox NOT checked but file already don't exist");   //only for tests/debug purposes
+                }
+            }
+            
             //After all settings are applied form SettingsSCR can be closed
             Close();
         }
@@ -242,7 +313,24 @@ namespace System_Monitor
         //
         private void SettingsSCR_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(SettingsSCRXPos, SettingsSCRYPos + MainSCRHeight1 - this.Height);            
+            this.Location = new Point(SettingsSCRXPos, SettingsSCRYPos + MainSCRHeight1 - this.Height); 
+           
+            //
+            //Checking if shortcut to application is created in Startup directory
+            //
+            string startUpFolder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+            string shortcutPath = startUpFolder + @"\System_Monitor.lnk";
+
+            if (System.IO.File.Exists(shortcutPath))
+            {
+                RunAtSystemStartupCheckBox.Checked = true;
+                //MessageBox.Show("Shortcut file exists in startup folder: " + shortcutPath);   //only for tests/debug purposes
+            }
+            else
+            {
+                RunAtSystemStartupCheckBox.Checked = false;
+                //MessageBox.Show("Shortcut file don't exists in startup folder: " + shortcutPath);   //only for tests/debug purposes
+            }
         }
 
         #endregion
