@@ -1,3 +1,7 @@
+------Version 0.0.42--------
+
+- Deleted test form Form1 from project
+
 ------Version 0.0.41--------
 
 - added RunAtSystemStartupCheckBox at SettingSCR

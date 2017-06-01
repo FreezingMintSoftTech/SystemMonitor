@@ -33,7 +33,6 @@ D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\en\System Monitor.resources.dll
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\pl\System Monitor.resources.dll
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.csprojResolveAssemblyReference.cache
-D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Form1.resources
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Properties.Resources.resources
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Data.lang.en.resources
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System_Monitor.Data.lang.pl.resources
@@ -48,3 +47,7 @@ D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\ManagedWifi.pdb
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\Interop.IWshRuntimeLibrary.dll
 D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.csproj.ResolveComReference.cache
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\System Monitor.exe.manifest
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\bin\Debug\System Monitor.application
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.exe.manifest
+D:\Programowanie C\System Monitor\v 0001\System Monitor\System Monitor\obj\Debug\System Monitor.application
